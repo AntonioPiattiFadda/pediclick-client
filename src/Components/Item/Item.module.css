@@ -1,0 +1,81 @@
+.cardContainer {
+  height: 175px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: rgba(128, 128, 128, 0.423) solid 1px;
+}
+
+.cardImageContainer {
+  height: 135px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardImage {
+  object-fit: cover;
+  width: 90px;
+  height: 90px;
+  border-radius: 5px;
+}
+
+.cardImageContainer > span:nth-child(2) {
+  border: solid 1px black;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+  align-self: flex-end;
+}
+
+.cardInformation {
+  background-color: white;
+  padding: 20px;
+}
+.cardInformationContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardInformationContent > span:nth-child(1) {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cardInformationContent > span:nth-child(2) {
+  color: #999999;
+  margin-top: -35px;
+  font-size: 14px;
+}
+
+.cardInformationContent > span:nth-child(3) {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cardButton {
+  position: relative;
+  z-index: 100;
+  width: 25px;
+  height: 25px;
+  align-self: flex-end;
+  right: 20px;
+  bottom: 40px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+}
+.cardButton:hover {
+  background-color: red;
+}

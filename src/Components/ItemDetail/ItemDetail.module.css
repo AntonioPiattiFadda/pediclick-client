@@ -1,0 +1,68 @@
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  padding-right: 20px;
+}
+
+.cardImage {
+  width: 150px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.infoContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.freeShipping {
+  font-size: 14px;
+  color: green;
+  margin-bottom: 5px;
+}
+
+.freeReturns {
+  font-size: 14px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .cardContainer {
+    flex-direction: column;
+  }
+
+  .imgContainer {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .infoContainer {
+    width: 100%;
+  }
+}
