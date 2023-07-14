@@ -8,6 +8,9 @@ import { useState } from 'react';
 const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
   const [successBuy, setSuccesBuy] = useState(false);
   const [orderId, setOrderId] = useState(0);
+  const [orderInfo, setOrderInfo] = useState({});
+  const [total, setTotal] = useState(0);
+  const [buyer, setBuyer] = useState({});
   const { handleSubmit, handleChange, values, setFieldValue, errors } =
     useFormik({
       initialValues: {
@@ -24,34 +27,22 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
           .email('El correo electrónico no es válido')
           .matches(/@/, 'El correo electrónico debe contener @')
           .required('El correo electrónico es obligatorio'),
-        contraseña: Yup.string()
-          .required('La contraseña es obligatoria')
-          .matches(
-            /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/,
-            'La contraseña debe tener al menos 8 caracteres, una mayúscula y un carácter alfanumérico'
-          ),
       }),
 
       onSubmit: (data) => {
-        // Crear la coleccion orders
         let total = getCartTotalPrice();
         let order = {
+          //NOTE -  Informacion que va al dueño del local
           buyer: data,
           items: cart,
           total,
         };
-        let orderId = 0;
-        // let orderCollection = collection(db, 'orders');
-        // addDoc(orderCollection, order)
-        //   .then((res) => setOrderId(res.id))
-        //   .catch((err) => console.log(err));
-
-        // cart.map((product) => {
-        //   let refDoc = doc(db, 'products', product.id);
-        //   updateDoc(refDoc, { stock: product.stock - product.quantity });
-        //   return product;
-        // });W
-        clearCart();
+        let newOrderId = 450;
+        console.log(order.buyer);
+        setOrderId(newOrderId);
+        setBuyer(data);
+        setTotal(total);
+        setOrderInfo(cart);
         setSuccesBuy(true);
       },
     });
@@ -59,16 +50,67 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
   if (successBuy) {
     return (
       <div className="formWrapper">
-        <h1>La compra se ha efectuado correctamente</h1>
-        <span>Tu numero de seguimiento es {orderId} </span>
+        <Typography
+          sx={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            marginBottom: '10px',
+          }}
+          color="grey.800"
+          align="center"
+        >
+          La compra se ha efectuado correctamente! Felicidades!
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: '15px',
+            marginBottom: '10px',
+          }}
+          color="grey.800"
+          align="center"
+        >
+          Tu numero de seguimiento es {orderId}
+        </Typography>
+        <span>
+          {' '}
+          Tu pedido es:{' '}
+          <ul>
+            {orderInfo.map((item) => {
+              return (
+                <li>
+                  {item.quantity} {item.name}
+                </li>
+              );
+            })}
+          </ul>
+        </span>
+        <p>
+          {' '}
+          A nombre de:{' '}
+          <span style={{ fontWeight: 'bold' }}>{buyer.nombre}</span>
+        </p>
+        <p>
+          Email:
+          <span style={{ fontWeight: 'bold' }}>{buyer.email}</span>
+        </p>
+        <span> Total: ${total} </span>
+        <span>La idea es que todo esto se mande por Whatsapp</span>
       </div>
     );
   }
 
   return (
     <div className="formWrapper">
-      <Typography color="grey.800" variant="h2" align="center">
-        Formulario de registro
+      <Typography
+        sx={{
+          fontSize: '20px',
+          fontWeight: 'bold',
+          marginBottom: '10px',
+        }}
+        color="grey.800"
+        align="center"
+      >
+        Ya casi terminas tu compra!
       </Typography>
 
       <form className="form-container" onSubmit={handleSubmit}>
@@ -108,22 +150,15 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
               helperText={errors.email}
             />
           </Grid>
-
-          <Grid item xs={12} md={7}>
-            <TextField
-              type="password"
-              label="Ingrese su contraseña"
-              variant="outlined"
-              fullWidth
-              name="contraseña"
-              onChange={handleChange}
-              value={values.contraseña}
-              error={errors.contraseña}
-              helperText={errors.contraseña}
-            />
-          </Grid>
         </Grid>
-        <Button type="submit" variant="contained">
+        <Button
+          sx={{
+            marginTop: '15px',
+            alignSelf: 'flex-end',
+          }}
+          type="submit"
+          variant="contained"
+        >
           Enviar
         </Button>
       </form>

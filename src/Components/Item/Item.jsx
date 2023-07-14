@@ -5,11 +5,20 @@ import { CartContext } from '../Context/CartContext';
 import ItemCount from '../ItemCount/ItemCount';
 
 const Item = ({ element }) => {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, getProductQuantityByID, minusOneElement, removeProduct } =
+    useContext(CartContext);
+  const initialValue = getProductQuantityByID(element.id);
 
-  const handleClick = (item) => {
-    const itemToAdd = { ...item, quantity: 1 };
-    addToCart(itemToAdd);
+  const handleAdd = () => {
+    const newElement = { ...element, quantity: 1 };
+    addToCart(newElement);
+  };
+  const handleMinus = (quantity) => {
+    if (quantity === 1) {
+      removeProduct(element.id);
+      return;
+    }
+    minusOneElement(element.id);
   };
 
   return (
@@ -28,13 +37,13 @@ const Item = ({ element }) => {
           </div>
         </div>
       </Link>
-      <ItemCount />
-      <button
-        onClick={() => handleClick(element)}
-        className={styles.cardButton}
-      >
-        +
-      </button>
+      <div className={styles.cardButton}>
+        <ItemCount
+          onMinus={handleMinus}
+          onAdd={handleAdd}
+          initial={initialValue || 0}
+        />
+      </div>
     </>
   );
 };

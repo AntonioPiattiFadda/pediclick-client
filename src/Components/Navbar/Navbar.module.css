@@ -8,8 +8,12 @@
 }
 
 .LogoPrincipal {
+  margin-left: 20px;
   width: 134px;
+  height: 50px;
   height: auto;
+  object-fit: cover;
+  background-color: grey;
 }
 
 /* .navbar__uList {

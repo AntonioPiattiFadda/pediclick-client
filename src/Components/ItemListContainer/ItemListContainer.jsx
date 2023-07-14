@@ -73,6 +73,7 @@ const ItemListContainer = () => {
         // <ProductsSkeleton color="#36d7b7" />
         <ItemList items={items} />
       )}
+      <span style={{ height: '40px' }}></span>
     </div>
   );
 };

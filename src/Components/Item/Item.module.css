@@ -66,16 +66,9 @@
 .cardButton {
   position: relative;
   z-index: 100;
-  width: 25px;
-  height: 25px;
   align-self: flex-end;
   right: 20px;
   bottom: 40px;
-  border-radius: 50%;
-  border: 1px solid black;
   background-color: white;
   cursor: pointer;
-}
-.cardButton:hover {
-  background-color: red;
 }

@@ -1,15 +1,15 @@
 .cart__container {
   position: relative;
-  padding-right: 10px;
+  padding-right: 20px;
 }
 
 .cart__count {
   position: absolute;
   top: -8px;
-  right: 8px;
+  right: 16px;
   width: 16px;
   height: 16px;
-  background-color: red;
+  background-color: rgb(90, 206, 90);
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -22,4 +22,3 @@
 .cart__icon {
   font-size: 24px;
 }
-

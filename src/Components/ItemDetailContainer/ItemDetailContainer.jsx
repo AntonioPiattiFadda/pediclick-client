@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../Context/CartContext';
 import styles from './ItemDetailContainer.module.css';
-import Swal from 'sweetalert2';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { getOneProduct } from '../../Services/products.service';
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
-  const { addToCart, cart, getProductQuantityByID } = useContext(CartContext);
+  const { addToCart, getProductQuantityByID, minusOneElement, removeProduct } =
+    useContext(CartContext);
 
   const [item, setItem] = useState({});
+  const initialValue = getProductQuantityByID(item.id);
 
   useEffect(() => {
     getOneProduct(id)
@@ -22,29 +23,34 @@ const ItemDetailContainer = () => {
       });
   }, [id]);
 
-  const onAdd = (contador) => {
-    const selectedProduct = {
-      ...item,
-      quantity: contador,
-    };
-    const duplicado = cart.some(
-      (producto) => cart.title === selectedProduct.title
-    );
-    addToCart(selectedProduct);
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: `Has añadido ${contador} ${item.name}`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  const onMinus = (quantity) => {
+    if (quantity === 1) {
+      removeProduct(item.id);
+      return;
+    }
+    minusOneElement(item.id);
   };
 
-  const initialValue = getProductQuantityByID(item.id);
+  const onAdd = () => {
+    const selectedProduct = {
+      ...item,
+      quantity: 1,
+    };
+    addToCart(selectedProduct);
+  };
 
   return (
     <div className={styles.container}>
-      <ItemDetail onAdd={onAdd} item={item} initialValue={initialValue} />
+      {Object.entries(item).length === 0 ? (
+        <h1>Cargando</h1>
+      ) : (
+        <ItemDetail
+          onMinus={onMinus}
+          onAdd={onAdd}
+          item={item}
+          initialValue={initialValue}
+        />
+      )}
     </div>
   );
 };

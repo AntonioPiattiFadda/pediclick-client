@@ -3,9 +3,9 @@ import { CartContext } from '../Context/CartContext';
 import Swal from 'sweetalert2';
 import FormCheckout from '../FormCheckout/FormCheckout';
 import EmptyCart from '../EmptyCart/EmptyCart';
-import Form from '../Form/Form';
-import Formulario from '../Form/Form';
 import styles from './Cart.module.css';
+import { FiTrash } from 'react-icons/fi';
+import { Button } from '@mui/material';
 
 const Cart = () => {
   const {
@@ -43,7 +43,8 @@ const Cart = () => {
     addOneElement(id);
   };
 
-  const handleMinus = (id) => {
+  const handleMinus = (id, quantity) => {
+    if (quantity === 1) return;
     minusOneElement(id);
   };
 
@@ -55,20 +56,23 @@ const Cart = () => {
           {cart.map((product) => {
             return (
               <div className={styles.cartItem} key={product.id}>
-                <img
-                  className={styles.productImage}
-                  src={product.image}
-                  alt={product.name}
-                />
+                <div className={styles.productImageAndName}>
+                  <img
+                    className={styles.productImage}
+                    src={product.image}
+                    alt={product.name}
+                  />
+                  <span className={styles.productTitle}>{product.name}</span>
+                </div>
                 <div className={styles.productDetails}>
-                  <h3 className={styles.productTitle}>{product.name}</h3>
-
                   <div className={styles.productPriceAndQuantity}>
                     <p className={styles.productPrice}>${product.price}</p>
                     <div className={styles.productQuantity}>
                       <button
                         className={styles.quantityButton}
-                        onClick={() => handleMinus(product.id)}
+                        onClick={() =>
+                          handleMinus(product.id, product.quantity)
+                        }
                       >
                         -
                       </button>
@@ -80,14 +84,12 @@ const Cart = () => {
                         +
                       </button>
                     </div>
+                    <FiTrash
+                      className={styles.removeButton}
+                      onClick={() => removeProduct(product.id)}
+                    />
                   </div>
                 </div>
-                <button
-                  className={styles.removeButton}
-                  onClick={() => removeProduct(product.id)}
-                >
-                  Eliminar producto
-                </button>
               </div>
             );
           })}
@@ -97,13 +99,15 @@ const Cart = () => {
           <p className={styles.totalAmount}>${total}</p>
         </div>
         <div className={styles.cartButtons}>
-          <button className={styles.clearButton} onClick={handleClear}>
+          <Button variant="outlined" onClick={handleClear}>
             Limpiar carrito
-          </button>
-          <button className={styles.buyButton} onClick={handleBuy}>
+          </Button>
+          <Button variant="contained" onClick={handleBuy}>
             Comprar
-          </button>
+          </Button>
         </div>
+        <span style={{ height: '30px' }}></span>
+        <span style={{ height: '30px' }}></span>
       </div>
     ) : (
       <EmptyCart />

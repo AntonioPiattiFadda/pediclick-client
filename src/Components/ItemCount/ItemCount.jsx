@@ -1,35 +1,40 @@
 import { useEffect, useState } from 'react';
 import styles from './ItemCount.module.css';
 
-const ItemCount = ({ initial = 1, onAdd }) => {
+const ItemCount = ({ initial = 0, onAdd, onMinus }) => {
   const [contador, setContador] = useState(initial);
   useEffect(() => {
     setContador(initial);
   }, [initial]);
 
   const sumar = () => {
+    onAdd();
     setContador(contador + 1);
   };
 
   const restar = () => {
-    if (contador > 1) {
-      setContador(contador - 1);
-    }
+    onMinus(contador);
+    setContador(contador - 1);
   };
 
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.counter}>{contador}</h2>
-      <div className={styles.buttonsContainer}>
+  if (initial === 0) {
+    return (
+      <div className={styles.container}>
         <button className={styles.button} onClick={sumar}>
           +
         </button>
-        <button className={styles.button} onClick={restar}>
-          -
-        </button>
       </div>
-      <button className={styles.buyButton} onClick={() => onAdd(contador)}>
-        Añadir al carrito
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      <button className={styles.button} onClick={restar}>
+        -
+      </button>
+      <span className={styles.counter}>{contador}</span>
+      <button className={styles.button} onClick={sumar}>
+        +
       </button>
     </div>
   );

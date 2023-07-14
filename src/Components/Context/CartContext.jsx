@@ -18,7 +18,7 @@ const CartContextProvider = ({ children }) => {
         if (selectedProduct.id === product.id) {
           return {
             ...product,
-            quantity: selectedProduct.quantity,
+            quantity: product.quantity + 1,
           };
         }
         return product;
@@ -79,7 +79,7 @@ const CartContextProvider = ({ children }) => {
 
   const minusOneElement = (id) => {
     const filteredProduct = cart.find((product) => product.id === id);
-    if (filteredProduct.quantity > 1) {
+    if (filteredProduct.quantity > 0) {
       let newArray = cart.map((product) => {
         if (id === product.id) {
           return {
