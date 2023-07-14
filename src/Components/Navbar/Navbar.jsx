@@ -26,7 +26,7 @@ const Navbar = () => {
     <div className={styles.navbar__container}>
       <a href="/">
         <img
-          src="../../assets/green-and-blue-investment-building.webp"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8nWPb3DyHkw5qoJBwFH-xJzpVRhUNL8zdJUM-nQ5Wy8kpSc5iv70wO-_4bmqAvdsJBA&usqp=CAU"
           alt="Logo"
           className={styles.LogoPrincipal}
         />
