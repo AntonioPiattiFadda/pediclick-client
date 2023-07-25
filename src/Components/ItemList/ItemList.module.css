@@ -4,6 +4,18 @@
   width: 100%;
   height: 100%;
 }
+.itemListCategorieTittle {
+  background-color: rgb(173, 216, 230);
+  height: 45px;
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100%);
+  margin-bottom: 20px;
+  color: white;
+  white-space: nowrap;
+}
 
 @media screen and (max-width: 765px) {
 }

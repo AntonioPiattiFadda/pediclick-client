@@ -8,31 +8,34 @@ import Form from './Components/Form/Form';
 import CartContextProvider from './Components/Context/CartContext';
 import Cart from './Components/Cart/Cart';
 import NotFound from './Components/NotFound/NotFound';
+import SearchContextProvider from './Components/Context/SearchContext';
 
 function App() {
   return (
     <div className={styles.app}>
       <BrowserRouter>
-        <CartContextProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<ItemListContainer />} />
-            <Route
-              path="/category/:categoryName"
-              element={<ItemListContainer />}
-            />
-            <Route
-              path="/ItemSearch/:searchedItem"
-              element={<ItemListContainer />}
-            />
-            <Route path="/itemDetail/:id" element={<ItemDetailContainer />} />
+        <SearchContextProvider>
+          <CartContextProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<ItemListContainer />} />
+              <Route
+                path="/category/:categoryName"
+                element={<ItemListContainer />}
+              />
+              <Route
+                path="/ItemSearch/:searchedItem"
+                element={<ItemListContainer />}
+              />
+              <Route path="/itemDetail/:id" element={<ItemDetailContainer />} />
 
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/formulario" element={<Form />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/formulario" element={<Form />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </CartContextProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CartContextProvider>
+        </SearchContextProvider>
         <Footer />
       </BrowserRouter>
     </div>

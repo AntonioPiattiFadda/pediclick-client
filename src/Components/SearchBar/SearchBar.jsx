@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import style from './SearchBar.module.css';
-
+import { RxMagnifyingGlass } from 'react-icons/rx';
+import { SearchContext } from '../Context/SearchContext';
 const SearchBar = () => {
-  const [searchString, setSearchString] = useState('');
+  const { searchString, setSearchString } = useContext(SearchContext);
 
   return (
     <div className={style.searchInput__container}>
+      <RxMagnifyingGlass
+        style={{
+          fontSize: '28px',
+        }}
+      />
       <input
         className={style.searchInput}
         value={searchString}

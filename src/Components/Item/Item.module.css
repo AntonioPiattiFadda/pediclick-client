@@ -1,8 +1,9 @@
 .cardContainer {
-  height: 175px;
+  height: 185px;
   display: flex;
   justify-content: space-between;
   border-bottom: rgba(128, 128, 128, 0.423) solid 1px;
+  margin-top: -20px;
 }
 
 .cardImageContainer {
@@ -15,8 +16,8 @@
 
 .cardImage {
   object-fit: cover;
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
 }
 
@@ -68,7 +69,19 @@
   z-index: 100;
   align-self: flex-end;
   right: 20px;
-  bottom: 40px;
+  bottom: 50px;
   background-color: white;
   cursor: pointer;
+}
+.noStockOvelay {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-content: center;
+  color: white;
+}
+.noStockOvelay span {
+  transform: rotate(-45deg);
 }

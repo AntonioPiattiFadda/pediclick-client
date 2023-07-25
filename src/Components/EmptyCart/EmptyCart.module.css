@@ -1,6 +1,6 @@
 .emptyCartContainer {
   text-align: center;
-  margin-top: 50px;
+  margin: 50px;
 }
 
 .emptyCartImage {
@@ -8,6 +8,6 @@
 }
 
 .emptyCartMessage {
-  font-size: 28px;
+  font-size: 18px;
   margin-top: 30px;
 }

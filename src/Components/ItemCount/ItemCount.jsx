@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './ItemCount.module.css';
 
-const ItemCount = ({ initial = 0, onAdd, onMinus }) => {
+const ItemCount = ({ blocked, initial = 0, onAdd, onMinus }) => {
   const [contador, setContador] = useState(initial);
   useEffect(() => {
     setContador(initial);
@@ -16,6 +16,14 @@ const ItemCount = ({ initial = 0, onAdd, onMinus }) => {
     onMinus(contador);
     setContador(contador - 1);
   };
+
+  if (blocked) {
+    return (
+      <div className={styles.container}>
+        <button className={styles.button}>+</button>
+      </div>
+    );
+  }
 
   if (initial === 0) {
     return (

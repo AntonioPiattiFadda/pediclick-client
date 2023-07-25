@@ -1,47 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 import styles from './ItemListContainer.module.css';
 import { getProducts } from '../../Services/products.service';
+import { SearchContext } from '../Context/SearchContext';
+import PromotionedProducts from '../PromotionedProducts/PromotionedProducts';
 
 const ItemListContainer = () => {
-  const { categoryName, searchedItem } = useParams();
+  const { searchString } = useContext(SearchContext);
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const itemCollection = collection(db, 'products');
-  //   let consulta = undefined;
-
-  //   if (categoryName) {
-  //     const q = query(
-  //       itemCollection,
-  //       where('category', '==', `${categoryName}`)
-  //     );
-  //     consulta = getDocs(q);
-  //   } else if (searchedItem) {
-  //     const searchedItemLowerCase = searchedItem.toLowerCase();
-  //     const q = query(
-  //       itemCollection,
-  //       where('title', '>=', `${searchedItemLowerCase}`),
-  //       where('title', '<=', `${searchedItemLowerCase}\uf8ff`)
-  //     );
-  //     consulta = getDocs(q);
-  //   } else {
-  //     consulta = getDocs(itemCollection);
-  //   }
-  //   consulta.then((res) => {
-  //     let products = res.docs.map((element) => {
-  //       return {
-  //         ...element.data(),
-  //         id: element.id,
-  //       };
-  //     });
-  //     setItems(products);
-  //     setLoading(false);
-  //   });
-  // }, [categoryName, searchedItem]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getProducts()
@@ -57,23 +25,51 @@ const ItemListContainer = () => {
             blocked: product.blocked,
           };
         });
-        setItems(mappedProducts);
+        const categoriesList = mappedProducts.map((product) => {
+          return product.category;
+        });
+        const arraySinRepetidos = Array.from(new Set(categoriesList));
+        setCategories(arraySinRepetidos.sort());
+        let searchedProducts = [];
+        if (searchString === '') {
+          searchedProducts = mappedProducts;
+        } else {
+          searchedProducts = mappedProducts.filter((product) => {
+            const productName = product.name.toLowerCase();
+            const searchText = searchString.toLowerCase();
+            return productName.includes(searchText);
+          });
+        }
+        setItems(
+          searchedProducts.sort((a, b) => {
+            return a.category.localeCompare(b.category);
+          })
+        );
         setLoading(false);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [items]);
+  }, [items, searchString]);
 
   return (
     <div className={styles.itemListContainer}>
+      <PromotionedProducts />
+
       {!!loading ? (
         <h1>Cargando...</h1>
       ) : (
         // <ProductsSkeleton color="#36d7b7" />
-        <ItemList items={items} />
+        <>
+          {categories.map((category) => {
+            const elements = items.filter((element) => {
+              return element.category === category;
+            });
+            return <ItemList category={category} items={elements} />;
+          })}
+        </>
       )}
-      <span style={{ height: '40px' }}></span>
+      <span style={{ height: '35px' }}></span>
     </div>
   );
 };
