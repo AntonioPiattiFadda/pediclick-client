@@ -25,3 +25,33 @@
 .searchInput:focus {
   outline: none;
 }
+
+.Categories {
+  background-color: rgb(187, 214, 180);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 45px;
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100%);
+  color: white;
+  white-space: nowrap;
+}
+.Categories a {
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.Categories img {
+  padding-left: 20px;
+  fill: white;
+}
+.link {
+  /* No le puedo poner nada por la especificidaed */
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: #f1f1f1;
+}

@@ -65,7 +65,9 @@ const ItemListContainer = () => {
             const elements = items.filter((element) => {
               return element.category === category;
             });
-            return <ItemList category={category} items={elements} />;
+            return (
+              <ItemList key={category} category={category} items={elements} />
+            );
           })}
         </>
       )}

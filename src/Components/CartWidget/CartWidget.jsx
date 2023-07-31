@@ -28,7 +28,8 @@ const CartWidget = () => {
         <span className={styles.cart__count}>{totalElements}</span>
         <BsCart2 className={styles.cart__icon} />
       </Link>
-      {cartQuestion && (
+      {/* NOTE - Iria el cartquestion pero todavia no tiene funcionalidad */}
+      {false && (
         <div
           id="cart__question"
           style={{

@@ -4,16 +4,23 @@ import SearchBar from '../SearchBar/SearchBar';
 import styles from './Navbar.module.css';
 import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => {
     setOpenMenu(!openMenu);
   };
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   return (
-    <div className={styles.navbar__container}>
-      {openMenu && <MobileMenu />}
+    <div
+      className={
+        openMenu ? styles.navbar__container : styles.navbar__container_sticky
+      }
+    >
+      <MobileMenu openMenu={openMenu} />
 
       <div className={styles.navbar__firstLine}>
         <div
@@ -41,7 +48,7 @@ const Navbar = () => {
         </a>
         <CartWidget />
       </div>
-      <SearchBar />
+      {isHome && <SearchBar />}
     </div>
   );
 };
