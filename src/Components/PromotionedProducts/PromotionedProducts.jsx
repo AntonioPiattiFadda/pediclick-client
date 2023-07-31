@@ -37,7 +37,7 @@ const PromotionedProducts = () => {
     <>
       <section
         style={{
-          width: '100vw',
+          width: '100%',
         }}
         id="Todas"
       >

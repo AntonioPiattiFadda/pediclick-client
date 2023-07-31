@@ -7,7 +7,7 @@ const ItemList = ({ items, category }) => {
     <>
       <section
         style={{
-          width: '100vw',
+          width: '100%',
         }}
         id={category}
       >

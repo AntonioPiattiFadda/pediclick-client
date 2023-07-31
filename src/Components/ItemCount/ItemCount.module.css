@@ -23,6 +23,7 @@
   background-color: white;
   cursor: pointer;
   font-size: 20px;
+  color: black;
 }
 .button:hover {
   background-color: grey;
