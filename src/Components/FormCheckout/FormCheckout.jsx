@@ -77,11 +77,13 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
         // Construir el mensaje personalizado
         const message = `¡Hola! Quisiera hacer el siguiente pedido a nombre de ${
           buyer.nombre
-        }: ${getCartItemDetails(cart)}. Pago: ${data.pay}. Total: ${total} `;
+        }: ${getCartItemDetails(cart)}. Pago: ${
+          data.pay
+        }. Total: ${total}. Buenardo esto Lorete`;
 
         // Función para enviar mensaje a WhatsApp
         const sendWhatsAppMessage = () => {
-          const whatsappLink = `https://wa.me/${3517631584}?text=${encodeURIComponent(
+          const whatsappLink = `https://wa.me/${3516192831}?text=${encodeURIComponent(
             message
           )}`;
           window.location.href = whatsappLink;
