@@ -4,6 +4,7 @@ import styles from './ItemListContainer.module.css';
 import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
 import PromotionedProducts from '../PromotionedProducts/PromotionedProducts';
+import { ProductsSkeleton } from '../../Utils/Skeletons';
 
 const ItemListContainer = () => {
   const { searchString } = useContext(SearchContext);
@@ -57,9 +58,14 @@ const ItemListContainer = () => {
       <PromotionedProducts />
 
       {!!loading ? (
-        <h1>Cargando...</h1>
+        <>
+          <span className={styles.ProductsTittle}>
+            Productos | Productos | Productos | Productos | Productos |
+            Productos | Productos
+          </span>
+          <ProductsSkeleton color="#36d7b7" />
+        </>
       ) : (
-        // <ProductsSkeleton color="#36d7b7" />
         <>
           {categories.map((category) => {
             const elements = items.filter((element) => {

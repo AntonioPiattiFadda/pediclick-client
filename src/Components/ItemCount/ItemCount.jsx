@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './ItemCount.module.css';
-
+import { toast } from 'react-toastify';
 const ItemCount = ({ blocked, initial = 0, onAdd, onMinus }) => {
   const [contador, setContador] = useState(initial);
   useEffect(() => {
@@ -8,13 +8,26 @@ const ItemCount = ({ blocked, initial = 0, onAdd, onMinus }) => {
   }, [initial]);
 
   const sumar = () => {
-    onAdd();
+    onAdd(addProductToast);
     setContador(contador + 1);
   };
 
   const restar = () => {
     onMinus(contador);
     setContador(contador - 1);
+  };
+
+  const addProductToast = (productName) => {
+    return toast.info(`Añadiste ${contador + 1} ${productName} a tu carrito!`, {
+      position: 'bottom-right',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
   };
 
   if (blocked) {
@@ -36,15 +49,17 @@ const ItemCount = ({ blocked, initial = 0, onAdd, onMinus }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <button className={styles.button} onClick={restar}>
-        -
-      </button>
-      <span className={styles.counter}>{contador}</span>
-      <button className={styles.button} onClick={sumar}>
-        +
-      </button>
-    </div>
+    <>
+      <div className={styles.container}>
+        <button className={styles.button} onClick={restar}>
+          -
+        </button>
+        <span className={styles.counter}>{contador}</span>
+        <button className={styles.button} onClick={sumar}>
+          +
+        </button>
+      </div>
+    </>
   );
 };
 

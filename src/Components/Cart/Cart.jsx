@@ -6,6 +6,15 @@ import EmptyCart from '../EmptyCart/EmptyCart';
 import styles from './Cart.module.css';
 import { FiTrash } from 'react-icons/fi';
 import { Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#7e6390', // Color pastel que se usará para el focus
+    },
+  },
+});
 
 const Cart = () => {
   const {
@@ -99,12 +108,14 @@ const Cart = () => {
           <p className={styles.totalAmount}>${total}</p>
         </div>
         <div className={styles.cartButtons}>
-          <Button variant="outlined" onClick={handleClear}>
-            Limpiar carrito
-          </Button>
-          <Button variant="contained" onClick={handleBuy}>
-            Comprar
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button variant="outlined" onClick={handleClear}>
+              Limpiar carrito
+            </Button>
+            <Button variant="contained" onClick={handleBuy}>
+              Comprar
+            </Button>
+          </ThemeProvider>
         </div>
         <span style={{ height: '30px' }}></span>
         <span style={{ height: '30px' }}></span>

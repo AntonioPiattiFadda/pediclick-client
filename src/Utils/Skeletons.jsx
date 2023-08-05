@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
-const ProductsSkeleton = () => {
+export const ProductsSkeleton = () => {
   return (
     <>
       <Box
@@ -186,4 +186,109 @@ const ProductsSkeleton = () => {
   );
 };
 
-export default ProductsSkeleton;
+export const PromoProductsSkeleton = () => {
+  return (
+    <Box
+      sx={{
+        height: '216px',
+        width: '100vw',
+        display: 'flex',
+        overflowY: 'auto',
+        gap: '20px',
+      }}
+    >
+      <Skeleton
+        sx={{
+          width: '140px',
+          height: '250px',
+          border: '1px solid lightgray',
+          marginTop: '-20px',
+          marginLeft: '20px',
+        }}
+      />
+
+      <Skeleton
+        sx={{
+          width: '140px',
+          height: '250px',
+          border: '1px solid lightgray',
+          marginTop: '-20px',
+          marginLeft: '20px',
+        }}
+      />
+    </Box>
+  );
+};
+
+export const DetailProductsSkeleton = () => {
+  return (
+    <Box
+      sx={{
+        height: 'calc(100vh - 130px)',
+        width: '95vw',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Skeleton
+        sx={{
+          width: 'calc(100% - 60px)',
+          height: '350px',
+          border: '1px solid lightgray',
+          marginTop: '-40px',
+        }}
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '95vw',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            marginLeft: '10px',
+            marginBottom: '20px',
+          }}
+        >
+          <Skeleton
+            sx={{
+              width: '140px',
+              height: '15px',
+              border: '1px solid lightgray',
+              marginTop: '-20px',
+            }}
+          />
+          <Skeleton
+            sx={{
+              width: '140px',
+              height: '15px',
+              border: '1px solid lightgray',
+              marginTop: '-20px',
+            }}
+          />
+          <Skeleton
+            sx={{
+              width: '140px',
+              height: '15px',
+              border: '1px solid lightgray',
+              marginTop: '-20px',
+            }}
+          />
+        </Box>
+        <Skeleton
+          sx={{
+            width: '35px',
+            height: '35px',
+            marginRight: '40px',
+          }}
+        />
+      </Box>
+    </Box>
+  );
+};

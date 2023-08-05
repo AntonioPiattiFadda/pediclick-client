@@ -1,8 +1,0 @@
-.formWrapper {
-  width: calc(100% - 40px);
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-}

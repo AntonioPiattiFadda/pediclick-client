@@ -54,7 +54,7 @@
   position: fixed;
   top: 70px;
   left: 0;
-  width: 100%;
+  width: calc(100vw);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;

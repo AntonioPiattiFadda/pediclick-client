@@ -3,6 +3,8 @@ import styles from './PromotionedProducts.module.css';
 import { getProducts } from '../../Services/products.service';
 import { Link } from 'react-router-dom';
 import { SearchContext } from '../Context/SearchContext';
+import { PromoProductsSkeleton } from '../../Utils/Skeletons';
+
 const PromotionedProducts = () => {
   const [items, setItems] = useState([]);
 
@@ -41,7 +43,14 @@ const PromotionedProducts = () => {
         }}
         id="Todas"
       >
-        {items.length !== 0 && (
+        {items.length === 0 ? (
+          <>
+            <span className={styles.PromoTittle}>
+              Promo | Promo | Promo | Promo | Promo | Promo | Promo
+            </span>
+            <PromoProductsSkeleton />
+          </>
+        ) : (
           <span className={styles.PromoTittle}>
             Promo | Promo | Promo | Promo | Promo | Promo | Promo
           </span>
