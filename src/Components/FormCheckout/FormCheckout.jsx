@@ -29,9 +29,12 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
   const [orderInfo, setOrderInfo] = useState({});
   const [total, setTotal] = useState(0);
   const [buyer, setBuyer] = useState({});
-  const [extraDeliveryInfo, setExtraDeliveryInfo] = useState({});
-
-  const handleExtraInfo = () => {};
+  const [extraDeliveryError, setExtraDeliveryError] = useState({
+    cashPayError: false,
+    cashPayErrorMessage: '',
+    deliveryError: false,
+    deliveryErrorMessage: '',
+  });
 
   const { handleSubmit, handleChange, values, setFieldValue, errors } =
     useFormik({
@@ -62,7 +65,7 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
           .required('El numero de telefono es obligatorio'),
         delivery: Yup.boolean().required(),
         pay: Yup.string().required(),
-        cashPayment: Yup.number().required(),
+        cashPayment: Yup.number(),
       }),
 
       onSubmit: (data) => {
@@ -74,6 +77,25 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
           total,
         };
         let newOrderId = 450;
+        //ANCHOR - Validador manual de la info
+        console.log(data.delivery);
+        if (data.delivery === true && data.cashPayment === 0) {
+          setExtraDeliveryError({
+            deliveryError: true,
+            deliveryErrorMessage:
+              'Controla la informacion del envio te faltan campos',
+          });
+          return;
+        }
+        if (data.pay === 'cash' && data.cashPayment === 0) {
+          setExtraDeliveryError({
+            cashPayError: true,
+            cashPayErrorMessage:
+              'Por favor ingresa el valor con el que vas a pagar',
+          });
+          return;
+        }
+
         setOrderId(newOrderId);
         setBuyer(data);
         setTotal(total);
@@ -83,15 +105,22 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
           const itemDetails = cart.map(
             (item) => `${item.name} (X${item.quantity})`
           );
-          return itemDetails.join(', ');
+          return itemDetails.join(`,
+          `);
         };
 
-        const message = `¡Hola! Quisiera hacer el siguiente pedido a nombre de ${
+        const message = ` ¡Hola! Quisiera hacer el siguiente pedido a nombre de ${
           data.nombre
-        }: ${getCartItemDetails(cart)}. 
+        }: 
+        ${getCartItemDetails(cart)}. 
+
+Retiro el dia: XXX
+Quisiera que me lo envien a: XXX
+
+Pago: ${data.pay}. 
+Pago con: XXX
         
-          Pago: ${data.pay}. Total: ${total}. 
-           Buenardo esto Lorete`;
+Total: ${total}.`;
 
         const sendWhatsAppMessage = () => {
           const whatsappLink = `https://wa.me/${3516192831}?text=${encodeURIComponent(
@@ -407,19 +436,25 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
                 )}
 
                 {values.pay === 'cash' && (
-                  <TextField
-                    name="cashPayment"
-                    fullWidth
-                    margin="normal"
-                    label="¿Con cuánto pagás?"
-                    id="outlined-start-adornment"
-                    sx={{ width: '25ch' }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                    }}
-                  />
+                  <>
+                    <TextField
+                      name="cashPayment"
+                      fullWidth
+                      onChange={handleChange}
+                      margin="normal"
+                      label="¿Con cuánto pagás?"
+                      id="outlined-start-adornment"
+                      sx={{ width: '25ch' }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">$</InputAdornment>
+                        ),
+                      }}
+                    />
+                    {extraDeliveryError.cashPayError && (
+                      <span>{extraDeliveryError.cashPayErrorMessage}</span>
+                    )}
+                  </>
                 )}
                 {values.pay === 'transfer' && (
                   <span

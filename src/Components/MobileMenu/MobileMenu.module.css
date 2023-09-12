@@ -2,10 +2,10 @@
 .MobileMenu {
   position: absolute;
   z-index: 1001;
-  top: 70px;
+  top: 65px;
   left: 0;
   width: 200px;
-  height: calc(100% - 70px);
+  height: calc(100% - 65px);
   background-color: rgb(200, 200, 200);
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
   transition: ease-in 0.4s all;
@@ -51,8 +51,8 @@
 }
 
 .MobileMenu-overlay {
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 65px;
   left: 0;
   width: calc(100vw);
   height: 100%;

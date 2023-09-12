@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState, useRef } from 'react';
-import { BsCart2 } from 'react-icons/bs';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../Context/CartContext';
 import styles from './CartWidget.module.css';
+import Carrito from '../../assets/svg/carrito.svg';
 
 const CartWidget = () => {
   const [cartQuestion, setCartQuestion] = useState(false);
@@ -26,7 +26,7 @@ const CartWidget = () => {
     <div className={styles.cart__container}>
       <Link to="/cart">
         <span className={styles.cart__count}>{totalElements}</span>
-        <BsCart2 className={styles.cart__icon} />
+        <img className={styles.cart__icon} src={Carrito} alt="Imagen de carrito de compra" />
       </Link>
       {/* NOTE - Iria el cartquestion pero todavia no tiene funcionalidad */}
       {false && (

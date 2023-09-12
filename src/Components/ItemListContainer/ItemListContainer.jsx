@@ -55,14 +55,11 @@ const ItemListContainer = () => {
 
   return (
     <div className={styles.itemListContainer}>
-      <PromotionedProducts />
+      {/* <PromotionedProducts /> */}
 
       {!!loading ? (
         <>
-          <span className={styles.ProductsTittle}>
-            Productos | Productos | Productos | Productos | Productos |
-            Productos | Productos
-          </span>
+          <span className={styles.ProductsTittle}>Agregar un skeleton</span>
           <ProductsSkeleton color="#36d7b7" />
         </>
       ) : (

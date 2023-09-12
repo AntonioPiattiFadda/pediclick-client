@@ -16,13 +16,17 @@ const endPoints = {
     updateProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
     deleteProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
   },
+
   categories: {
     getCategoriesList: `${API}/api/${VERSION}/categories/`,
-    addCategory: `${API}/api/${VERSION}/categories/`,
-    getCategoryItems: (id) =>
-      `${API}/api/${VERSION}/categories/${id}/products/`,
-    updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
+    getAllCategoryItems: `${API}/api/${VERSION}/categories/allItems`,
+
+    getCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
+    addCategory: `${API}/api/${VERSION}/categories`,
+    updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
+    deleteCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
   },
+
   files: {
     addImage: `${API}/api/${VERSION}/files/upload/`,
   },
