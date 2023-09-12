@@ -24,7 +24,7 @@ const CartWidget = () => {
 
   return (
     <div className={styles.cart__container}>
-      <Link to="/cart">
+      <Link className={styles.cart__a} to="/cart">
         <span className={styles.cart__count}>{totalElements}</span>
         <img className={styles.cart__icon} src={Carrito} alt="Imagen de carrito de compra" />
       </Link>

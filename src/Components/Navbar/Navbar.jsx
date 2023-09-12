@@ -14,7 +14,7 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const navStyle = {
-    marginBottom: '-15px',
+    // marginBottom: '-15px',
   };
 
   return (
@@ -49,7 +49,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* //NOTE - Tercer componente */}
         <CartWidget />
       </div>
       {isHome && <SearchBar />}
