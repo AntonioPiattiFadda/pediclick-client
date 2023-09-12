@@ -1,4 +1,6 @@
 .footer-container {
+  position: absolute;
+  bottom: 0rem;
   width: 100vw;
   height: 4rem;
   background: #fff;
