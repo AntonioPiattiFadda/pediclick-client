@@ -70,9 +70,9 @@ const MobileMenu = ({ openMenu }) => {
           </li>
         </ul>
       </div>
-      <div
+      {/* <div
         className={openMenu ?  styles['MobileMenu-overlay'] : styles.MobileMenuClosed}
-       ></div>
+       ></div> */}
     </>
   );
 };

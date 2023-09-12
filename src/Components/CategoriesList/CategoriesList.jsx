@@ -19,6 +19,7 @@ const CategoriesList = () => {
         console.error(err);
       });
   }, []);
+  //NOTE - Resalatar al active Link
   const [activeLink, setActiveLink] = useState('');
 
   return (
