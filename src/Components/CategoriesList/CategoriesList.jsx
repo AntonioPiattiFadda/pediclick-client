@@ -19,40 +19,7 @@ const CategoriesList = () => {
         console.error(err);
       });
   }, []);
-
-  //NOTE - Logica para scroll.
   const [activeLink, setActiveLink] = useState('');
-
-  const scrollActive = () => {
-    const sections = document.querySelectorAll('section[id]');
-    sections.forEach((section) => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 250;
-      const sectionId = section.getAttribute('id');
-
-      if (
-        window.scrollY > sectionTop &&
-        window.scrollY <= sectionTop + sectionHeight
-      ) {
-        setActiveLink(sectionId);
-      }
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollActive);
-  }, []);
-
-  const handleScroll = (e, sectionId) => {
-    e.preventDefault();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const yOffset = -105;
-      const y =
-        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
 
   return (
     <div className={style.categories__container}>
@@ -64,11 +31,7 @@ const CategoriesList = () => {
               activeLink === category ? style.activeLink : style.category
             }
           >
-            <a
-              className={style.link}
-              href="#Todas"
-              onClick={(e) => handleScroll(e, category)}
-            >
+            <a className={style.link} href={`/${category}`}>
               {category}
             </a>
           </span>
