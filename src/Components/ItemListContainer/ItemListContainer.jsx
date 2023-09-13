@@ -5,30 +5,30 @@ import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
 import { ProductsSkeleton } from '../../Utils/Skeletons';
 
+const transformProductsData = (data) => {
+  return data.map((product) => ({
+    id: product.id,
+    name: product.name,
+    image: product.image,
+    description: product.description,
+    price: product.price,
+    category: product.category.name,
+    blocked: product.blocked,
+  }));
+};
+
 const ItemListContainer = () => {
   const { searchString, searchedCategory } = useContext(SearchContext);
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     getProducts()
       .then((res) => {
-        const mappedProducts = res.map((product) => {
-          return {
-            id: product.id,
-            name: product.name,
-            image: product.image,
-            description: product.description,
-            price: product.price,
-            category: product.category.name,
-            blocked: product.blocked,
-          };
-        });
-        // const categoriesList = mappedProducts.map((product) => {
-        //   return product.category;
-        // });
-        // const arraySinRepetidos = Array.from(new Set(categoriesList));
-        // setCategories(arraySinRepetidos.sort());
+        const mappedProducts = transformProductsData(res);
+
+        
         let searchedProducts = [];
         if (searchString === '') {
           searchedProducts = mappedProducts;
@@ -40,11 +40,15 @@ const ItemListContainer = () => {
           });
         }
         if (searchedCategory !== '') {
-          setItems(
-            searchedProducts.filter((product) => {
-              return product.category === searchedCategory;
-            })
-          );
+          const filteredProducts = searchedProducts.filter((product) => {
+            return product.category === searchedCategory;
+          });
+          if (filteredProducts.length === 0) {
+            setItems([]);
+            setLoading(false);
+            return;
+          }
+          setItems(filteredProducts);
           setLoading(false);
           return;
         }

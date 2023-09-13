@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import style from './CategoriesList.module.css';
-import { getCategories } from '../../Services/categories.service';
+import { getAllCategoriesItems } from '../../Services/categories.service';
 import { SearchContext } from '../Context/SearchContext';
 
 const CategoriesList = () => {
@@ -8,22 +8,24 @@ const CategoriesList = () => {
   const { setSearchedCategory, searchedCategory } = useContext(SearchContext);
 
   useEffect(() => {
-    getCategories()
+    getAllCategoriesItems()
       .then((res) => {
-        const data = res.map((category) => {
+        const filteredData = res.filter((category) => {
+          return category.name && category.products.length > 0;
+        });
+        const data = filteredData.map((category) => {
           return category.name;
         });
         const sortedData = data.sort((a, b) => {
           return a.localeCompare(b);
         });
+        //NOTE - Ver oporque no filtra las cat que no tienen productos
         setCategories(sortedData);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
-  //NOTE - Resalatar al active Link
-  const [activeLink, setActiveLink] = useState('');
 
   return (
     <div className={style.categories__container}>

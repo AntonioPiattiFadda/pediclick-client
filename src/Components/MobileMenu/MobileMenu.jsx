@@ -4,7 +4,7 @@ import styles from './MobileMenu.module.css';
 const MobileMenu = ({ openMenu }) => {
   return (
     <>
-      <div className={openMenu ? styles.MobileMenu : styles.MobileMenuClosed}>
+      {/* <div className={openMenu ? styles.MobileMenu : styles.MobileMenuClosed}>
         <ul>
           <div>
             <li>
@@ -69,7 +69,7 @@ const MobileMenu = ({ openMenu }) => {
             <a href="/">Me encantó la pagina! La quiero para mi negocio!</a>
           </li>
         </ul>
-      </div>
+      </div> */}
       {/* <div
         className={openMenu ?  styles['MobileMenu-overlay'] : styles.MobileMenuClosed}
        ></div> */}
