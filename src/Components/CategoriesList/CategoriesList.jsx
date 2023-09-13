@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import style from './CategoriesList.module.css';
 import { getCategories } from '../../Services/categories.service';
+import { SearchContext } from '../Context/SearchContext';
 
 const CategoriesList = () => {
   const [categories, setCategories] = useState([]);
+  const { setSearchedCategory, searchedCategory } = useContext(SearchContext);
+
   useEffect(() => {
     getCategories()
       .then((res) => {
@@ -29,12 +32,17 @@ const CategoriesList = () => {
           <span
             key={category}
             className={
-              activeLink === category ? style.activeLink : style.category
+              searchedCategory === category ? style.activeLink : style.category
             }
           >
-            <a className={style.link} href={`/${category}`}>
+            <button
+              onClick={() => {
+                setSearchedCategory(category);
+              }}
+              className={style.link}
+            >
               {category}
-            </a>
+            </button>
           </span>
         );
       })}

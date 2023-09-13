@@ -51,7 +51,7 @@ const Navbar = () => {
 
         <CartWidget />
       </div>
-      {isHome && <SearchBar />}
+      <SearchBar />
     </div>
   );
 };

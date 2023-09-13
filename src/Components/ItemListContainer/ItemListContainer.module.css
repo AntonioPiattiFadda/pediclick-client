@@ -1,8 +1,9 @@
 .itemListContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: calc(100vw - 20px);
+  height: 70vh;
+  overflow-x: scroll;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .ProductsTittle {
   background-color: rgb(230, 173, 173);

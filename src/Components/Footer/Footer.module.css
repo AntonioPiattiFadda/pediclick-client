@@ -1,11 +1,12 @@
 .footer-container {
-  position: absolute;
+  position: sticky;
   bottom: 0rem;
   width: 100vw;
   height: 4rem;
   background: #fff;
   display: grid;
   place-content: center;
+  z-index: 1000;
 }
 .footer-card {
   width: 17.25rem;

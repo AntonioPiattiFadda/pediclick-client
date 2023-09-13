@@ -1,9 +1,11 @@
 .itemList {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(50vw - 15px), 1fr));
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
 }
+
 .itemListCategorieTittle {
   background-color: rgb(173, 216, 230);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

@@ -45,69 +45,36 @@ const Item = ({ element }) => {
   };
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="light"
-      />
-      {!element.blocked ? (
-        <Link
-          to={`/itemDetail/${element.id}`}
-          style={{ textDecoration: 'none' }}
-        >
-          <div className={styles.cardContainer}>
-            <div className={styles.cardInformation}>
-              <div className={styles.cardInformationContent}>
-                <span>{element.name}</span>
-                <span>{element.description}</span>
-                <span>${element.price}</span>
-              </div>
-            </div>
-            <div className={styles.cardImageContainer}>
-              {element.blocked && (
-                <div className={styles.noStockOvelay}>
-                  <span>No hay stock</span>
-                </div>
-              )}
-              <img className={styles.cardImage} src={element.image} alt="" />
-            </div>
-          </div>
-        </Link>
-      ) : (
+      <Link
+        disabled={element.blocked}
+        to={`/itemDetail/${element.id}`}
+        style={{ textDecoration: 'none', width: 'calc(50vw - 15px)' }}
+      >
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="light"
+        />
         <div className={styles.cardContainer}>
-          <div className={styles.cardInformation}>
-            <div className={styles.cardInformationContent}>
-              <span>{element.name}</span>
-              <span>{element.description}</span>
-              <span>${element.price}</span>
-            </div>
-          </div>
+          <span className={styles.cardName}>{element.name}</span>
+          <span className={styles.cardPrice}>${element.price}</span>c
           <div className={styles.cardImageContainer}>
-            {element.blocked && (
+            {/* {element.blocked && (
               <div className={styles.noStockOvelay}>
                 <span>No hay stock</span>
               </div>
-            )}
+            )} */}
             <img className={styles.cardImage} src={element.image} alt="" />
           </div>
         </div>
-      )}
-
-      <div className={styles.cardButton}>
-        <ItemCount
-          blocked={element.blocked}
-          onMinus={handleMinus}
-          onAdd={handleAdd}
-          initial={initialValue || 0}
-        />
-      </div>
+      </Link>
     </>
   );
 };

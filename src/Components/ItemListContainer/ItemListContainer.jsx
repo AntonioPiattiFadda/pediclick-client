@@ -3,14 +3,12 @@ import ItemList from '../ItemList/ItemList';
 import styles from './ItemListContainer.module.css';
 import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
-import PromotionedProducts from '../PromotionedProducts/PromotionedProducts';
 import { ProductsSkeleton } from '../../Utils/Skeletons';
 
 const ItemListContainer = () => {
-  const { searchString } = useContext(SearchContext);
+  const { searchString, searchedCategory } = useContext(SearchContext);
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getProducts()
@@ -26,11 +24,11 @@ const ItemListContainer = () => {
             blocked: product.blocked,
           };
         });
-        const categoriesList = mappedProducts.map((product) => {
-          return product.category;
-        });
-        const arraySinRepetidos = Array.from(new Set(categoriesList));
-        setCategories(arraySinRepetidos.sort());
+        // const categoriesList = mappedProducts.map((product) => {
+        //   return product.category;
+        // });
+        // const arraySinRepetidos = Array.from(new Set(categoriesList));
+        // setCategories(arraySinRepetidos.sort());
         let searchedProducts = [];
         if (searchString === '') {
           searchedProducts = mappedProducts;
@@ -41,11 +39,16 @@ const ItemListContainer = () => {
             return productName.includes(searchText);
           });
         }
-        setItems(
-          searchedProducts.sort((a, b) => {
-            return a.category.localeCompare(b.category);
-          })
-        );
+        if (searchedCategory !== '') {
+          setItems(
+            searchedProducts.filter((product) => {
+              return product.category === searchedCategory;
+            })
+          );
+          setLoading(false);
+          return;
+        }
+        setItems(searchedProducts);
         setLoading(false);
       })
       .catch((error) => {
@@ -64,17 +67,9 @@ const ItemListContainer = () => {
         </>
       ) : (
         <>
-          {categories.map((category) => {
-            const elements = items.filter((element) => {
-              return element.category === category;
-            });
-            return (
-              <ItemList key={category} category={category} items={elements} />
-            );
-          })}
+          <ItemList items={items} />
         </>
       )}
-      <span style={{ height: '35px' }}></span>
     </div>
   );
 };
