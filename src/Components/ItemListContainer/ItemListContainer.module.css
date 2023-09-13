@@ -1,7 +1,5 @@
 .itemListContainer {
   width: calc(100vw - 20px);
-  height: 70vh;
-  overflow-x: scroll;
   padding-left: 10px;
   padding-right: 10px;
 }

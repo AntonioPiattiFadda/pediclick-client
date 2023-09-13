@@ -1,9 +1,20 @@
 .cardContainer {
-  width: calc(50vw - 10px);
+  width: calc(50vw - 20px);
   height: 7.5rem;
   flex-shrink: 0;
   border-radius: 0.3125rem;
   box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
+  text-decoration: none;
+}
+.cardInfo {
+  position: absolute;
+  width: 100%;
+  bottom: 1rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .cardImage {
@@ -16,16 +27,18 @@
 }
 
 .cardName {
-  position: absolute;
+  border-radius: 1.875rem;
+  background: #efeeee;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+
+  width: 5.25rem;
+  height: 1rem;
+  padding: 0.3rem;
   display: flex;
-  width: 7.25rem;
-  height: 1.1875rem;
-  padding: 0.625rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  flex-shrink: 0;
-  background-color: white;
+
   color: #000;
   font-family: Inter;
   font-size: 0.75rem;
@@ -34,29 +47,29 @@
   line-height: normal;
   text-transform: uppercase;
   z-index: 10;
-  border-radius: 0.3125rem;
 }
 .cardPrice {
   display: flex;
   width: 2.0625rem;
-  height: 1.1875rem;
-  padding: 0.625rem;
+  height: 1rem;
+  padding: 0.3rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  flex-shrink: 0;
-  background-color: white;
-  position: absolute;
+
   color: #000;
-  font-family: Inter;
   font-size: 0.5rem;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
   text-transform: uppercase;
   z-index: 10;
-  border-radius: 0.3125rem;
+
+  border-radius: 1.875rem;
+  background: #efeeee;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .noStockOvelay {
   position: absolute;
   display: none;

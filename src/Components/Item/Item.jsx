@@ -10,8 +10,10 @@ const Item = ({ element }) => {
         disabled={element.blocked}
         to={`/itemDetail/${element.id}`}
       >
-        <span className={styles.cardName}>{element.name}</span>
-        <span className={styles.cardPrice}>${element.price}</span>c
+        <div className={styles.cardInfo}>
+          <span className={styles.cardName}>{element.name}</span>
+          <span className={styles.cardPrice}>${element.price}</span>
+        </div>
         {/* {element.blocked && (
               <div className={styles.noStockOvelay}>
                 <span>No hay stock</span>
