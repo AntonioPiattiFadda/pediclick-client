@@ -1,13 +1,5 @@
 .cardContainer {
-  width: calc(50vw - 20px);
-  height: 7.5rem;
-  flex-shrink: 0;
-  border-radius: 0.3125rem;
-  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
-}
-
-.cardImageContainer {
-  width: calc(50vw - 20px);
+  width: calc(50vw - 10px);
   height: 7.5rem;
   flex-shrink: 0;
   border-radius: 0.3125rem;
@@ -15,10 +7,12 @@
 }
 
 .cardImage {
+  position: absolute;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  width: calc(50vw - 20px);
+  height: 7.5rem;
   border-radius: 0.3125rem;
+  z-index: 1;
 }
 
 .cardName {
@@ -39,6 +33,8 @@
   font-weight: 400;
   line-height: normal;
   text-transform: uppercase;
+  z-index: 10;
+  border-radius: 0.3125rem;
 }
 .cardPrice {
   display: flex;
@@ -58,6 +54,8 @@
   font-weight: 300;
   line-height: normal;
   text-transform: uppercase;
+  z-index: 10;
+  border-radius: 0.3125rem;
 }
 .noStockOvelay {
   position: absolute;

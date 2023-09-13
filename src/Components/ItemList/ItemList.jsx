@@ -10,6 +10,11 @@ const ItemList = ({ items }) => {
           return <Item key={element.id} element={element} />;
         })}
       </div>
+      <span
+        style={{
+          width: '120px',
+        }}
+      ></span>
     </>
   );
 };
