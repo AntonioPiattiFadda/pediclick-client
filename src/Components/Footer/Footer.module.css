@@ -1,5 +1,5 @@
 .footer-container {
-  position: sticky;
+  position: absolute;
   bottom: 0rem;
   width: 100vw;
   height: 4rem;
