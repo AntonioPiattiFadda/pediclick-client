@@ -3,94 +3,26 @@
   flex-direction: column;
   padding: 20px;
 }
-
-.cartContainer h1 {
-  font-size: 20px;
-  padding-bottom: 10px;
-  border-bottom: rgba(128, 128, 128, 0.423) solid 1px;
-  margin: 0;
-  margin-bottom: 10px;
-}
-
-.cartContainer .actions {
-  display: flex;
-  justify-content: space-between;
-}
-.productImageAndName {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .cartItem {
-  /* border-bottom: solid 1px grey; */
-  border-bottom: rgba(128, 128, 128, 0.423) solid 1px;
+  width: 23.625rem;
+  height: 6.25rem;
+  border-radius: 0.625rem;
+  background: #fff;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
+}
+.cartImage {
+  width: 8.0625rem;
+  height: 5rem;
+  flex-shrink: 0;
+  border-radius: 0.3125rem;
 
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
 }
-.productImage {
-  width: 45px;
-  height: 45px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-.productPriceAndQuantity {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.productPrice {
-  font-weight: bold;
-}
-
-.productQuantity {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: auto;
-  border-radius: 5px;
-  border: 0.5px solid black;
-  height: 35px;
-  margin-left: auto;
-}
-
-.quantityButton {
-  display: grid;
-  place-content: center;
-  width: 35px;
-  height: 35px;
-  align-self: flex-end;
-  border-radius: 5px;
-  border: none;
-  background-color: white;
-  cursor: pointer;
-}
-
-.quantityButton:hover {
-  background-color: #eee;
-}
-
-.quantity {
-  width: 35px;
-  display: flex;
-  justify-content: center;
-}
-
-.removeButton {
-  height: 35px;
-  padding: 10px;
-  margin: 0, 10px;
-  border-radius: 5px;
-  font-size: 20px;
-}
-
-.cartButtons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.totalAmount {
-  font-weight: bold;
+.title {
+  color: #000;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

@@ -2,7 +2,8 @@
   display: grid;
   place-content: center;
   width: 100%;
-  height: calc(100vw - 200px);
+  height: 65vh;
+  max-height: 65vh;
   justify-items: center;
 }
 .notfound_title {

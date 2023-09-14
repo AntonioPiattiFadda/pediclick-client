@@ -12,19 +12,13 @@ const Navbar = () => {
     setOpenMenu(!openMenu);
   };
   const location = useLocation();
-  const isHome = location.pathname === '/';
-  const navStyle = {
-    // marginBottom: '-15px',
-  };
+  const isCart = location.pathname === '/cart';
 
   return (
-    <div
-      className={styles.navbar__container
-      }
-    >
+    <div className={styles.navbar__container}>
       <MobileMenu openMenu={openMenu} />
 
-      <div style={isHome ? navStyle : {}} className={styles.navbar__firstLine}>
+      <div className={styles.navbar__firstLine}>
         {/* //NOTE - Prmer componente */}
         <div className={styles.navbar__menuMobile}>
           <img
@@ -50,7 +44,7 @@ const Navbar = () => {
 
         <CartWidget />
       </div>
-      <SearchBar />
+      {!isCart && <SearchBar />}
     </div>
   );
 };

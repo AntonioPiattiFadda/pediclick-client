@@ -8,13 +8,6 @@ import { FiTrash } from 'react-icons/fi';
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#7e6390', // Color pastel que se usará para el focus
-    },
-  },
-});
 
 const Cart = () => {
   const {
@@ -60,19 +53,19 @@ const Cart = () => {
   return !showFormCheckout ? (
     cart.length ? (
       <div className={styles.cartContainer}>
-        <h1 className={styles.title}>Mi carrito de compras</h1>
+        <h2 className={styles.title}>Carrito de compra</h2>
         <div className={styles.cartItems}>
           {cart.map((product) => {
             return (
               <div className={styles.cartItem} key={product.id}>
-                <div className={styles.productImageAndName}>
+                <div className={styles.productImage}>
                   <img
                     className={styles.productImage}
                     src={product.image}
                     alt={product.name}
                   />
-                  <span className={styles.productTitle}>{product.name}</span>
                 </div>
+                
                 <div className={styles.productDetails}>
                   <div className={styles.productPriceAndQuantity}>
                     <p className={styles.productPrice}>${product.price}</p>
@@ -103,20 +96,17 @@ const Cart = () => {
             );
           })}
         </div>
+
         <div className={styles.cartTotal}>
           <p className={styles.totalText}>Total:</p>
           <p className={styles.totalAmount}>${total}</p>
         </div>
+
         <div className={styles.cartButtons}>
-          <ThemeProvider theme={theme}>
-            <Button variant="outlined" onClick={handleClear}>
-              Limpiar carrito
-            </Button>
-            <Button variant="contained" onClick={handleBuy}>
-              Comprar
-            </Button>
-          </ThemeProvider>
+           
+          
         </div>
+
         <span style={{ height: '30px' }}></span>
         <span style={{ height: '30px' }}></span>
       </div>

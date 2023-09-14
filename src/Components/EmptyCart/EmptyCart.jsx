@@ -1,15 +1,20 @@
 import React from 'react';
 import styles from './EmptyCart.module.css';
-import PromotionedProducts from '../PromotionedProducts/PromotionedProducts';
+import EmptyCartIcon from '../../assets/svg/EmptyCartIcon.svg';
 
 const EmptyCart = () => {
   return (
     <>
-      <div className={styles.emptyCartContainer}>
-        <h2 className={styles.emptyCartMessage}>Tu carrito esta vacío!</h2>
-        <span>Puedes ver algunos de los productos que tenemos para ti</span>
+      <div className={styles.emptycart_container}>
+        <img
+          src={EmptyCartIcon}
+          alt="Lupa que indica que no haz encotrado el producto"
+        />
+        <h2 className={styles.emptycart_title}>Aún no hay pedidos</h2>
+        <span className={styles.emptycart_subtitle}>
+          Selecciona un producto y <br></br> luego elije la cantidad.
+        </span>
       </div>
-      <PromotionedProducts />
     </>
   );
 };

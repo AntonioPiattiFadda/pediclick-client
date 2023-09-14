@@ -25,3 +25,6 @@
 .footer-icon {
   width: 1.5rem;
 }
+.footer-link {
+  text-decoration: none;
+}

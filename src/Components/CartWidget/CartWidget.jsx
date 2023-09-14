@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../Context/CartContext';
 import styles from './CartWidget.module.css';
 import Carrito from '../../assets/svg/carrito.svg';
+import CarritoSeleccionado from '../../assets/svg/carritoSeleccionado.svg';
+import { useLocation } from 'react-router-dom';
 
 const CartWidget = () => {
+  const location = useLocation();
+  const isCart = location.pathname === '/cart';
+
   const [cartQuestion, setCartQuestion] = useState(false);
   const { cart, clearCart } = useContext(CartContext);
   const totalElements = cart.length;
@@ -26,7 +31,11 @@ const CartWidget = () => {
     <div className={styles.cart__container}>
       <Link className={styles.cart__a} to="/cart">
         <span className={styles.cart__count}>{totalElements}</span>
-        <img className={styles.cart__icon} src={Carrito} alt="Imagen de carrito de compra" />
+        <img
+          className={styles.cart__icon}
+          src={isCart ? CarritoSeleccionado : Carrito}
+          alt="Imagen de carrito de compra"
+        />
       </Link>
       {/* NOTE - Iria el cartquestion pero todavia no tiene funcionalidad */}
       {false && (
