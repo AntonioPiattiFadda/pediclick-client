@@ -7,6 +7,74 @@ export const ProductsSkeleton = () => {
     <>
       <Box
         sx={{
+          display: 'grid',
+          gridTemplateColumns:
+            'repeat(auto-fill, minmax(calc(50vw - 40px), 1fr))',
+          gap: '30px',
+          alignItems: 'center',
+          justifyItems: 'center',
+          maxHeight: '65vh',
+          overflowY: 'scroll',
+          overflowX: 'hidden',
+        }}
+      >
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: 'calc(50vw - 20px)',
+            minHeight: '7.5rem',
+            borderRadius: ' 0.3125rem',
+          }}
+        />
+      </Box>
+    </>
+  );
+};
+export const ProductsSkeletonFirst = () => {
+  return (
+    <>
+      <Box
+        sx={{
           height: '175px',
           width: '100vw',
           display: 'flex',

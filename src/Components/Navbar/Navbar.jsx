@@ -13,6 +13,7 @@ const Navbar = () => {
   };
   const location = useLocation();
   const isCart = location.pathname === '/cart';
+  const isItemDetail = location.pathname.includes('/itemDetail');
 
   return (
     <div className={styles.navbar__container}>
@@ -44,7 +45,7 @@ const Navbar = () => {
 
         <CartWidget />
       </div>
-      {!isCart && <SearchBar />}
+      {!isCart && !isItemDetail && <SearchBar />}
     </div>
   );
 };

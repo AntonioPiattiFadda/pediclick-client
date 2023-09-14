@@ -71,11 +71,8 @@ const ItemListContainer = () => {
 
   return (
     <div className={styles.itemListContainer}>
-      {/* <PromotionedProducts /> */}
-
       {!!loading ? (
         <>
-          <span className={styles.ProductsTittle}>Agregar un skeleton</span>
           <ProductsSkeleton color="#36d7b7" />
         </>
       ) : (

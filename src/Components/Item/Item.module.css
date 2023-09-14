@@ -1,5 +1,5 @@
 .cardContainer {
-  width: calc(50vw - 20px);
+  width: calc(50vw - 30px);
   height: 7.5rem;
   flex-shrink: 0;
   border-radius: 0.3125rem;
@@ -20,7 +20,7 @@
 .cardImage {
   position: absolute;
   object-fit: cover;
-  width: calc(50vw - 20px);
+  width: calc(50vw - 30px);
   height: 7.5rem;
   border-radius: 0.3125rem;
   z-index: 1;

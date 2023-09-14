@@ -4,10 +4,7 @@ import Swal from 'sweetalert2';
 import FormCheckout from '../FormCheckout/FormCheckout';
 import EmptyCart from '../EmptyCart/EmptyCart';
 import styles from './Cart.module.css';
-import { FiTrash } from 'react-icons/fi';
-import { Button } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Delete from '../../assets/svg/Delete.svg';
 
 const Cart = () => {
   const {
@@ -58,17 +55,28 @@ const Cart = () => {
           {cart.map((product) => {
             return (
               <div className={styles.cartItem} key={product.id}>
-                <div className={styles.productImage}>
+                <div className={styles.cartImage}>
                   <img
-                    className={styles.productImage}
+                    className={styles.cartImage}
                     src={product.image}
                     alt={product.name}
                   />
                 </div>
-                
+                <div className={styles.cardInfo_container}>
+                  <span className={styles.cardName}>{product.name}</span>
+                  <span className={styles.cardPrice}>${product.price}</span>
+                </div>
+
+                <div>
+                  <img
+                    src={Delete}
+                    alt="Eliminar producto del carrito"
+                    onClick={() => removeProduct(product.id)}
+                  />
+                </div>
+                {/* 
                 <div className={styles.productDetails}>
                   <div className={styles.productPriceAndQuantity}>
-                    <p className={styles.productPrice}>${product.price}</p>
                     <div className={styles.productQuantity}>
                       <button
                         className={styles.quantityButton}
@@ -86,29 +94,27 @@ const Cart = () => {
                         +
                       </button>
                     </div>
-                    <FiTrash
-                      className={styles.removeButton}
-                      onClick={() => removeProduct(product.id)}
-                    />
+                   
                   </div>
-                </div>
+                </div> */}
               </div>
             );
           })}
         </div>
 
         <div className={styles.cartTotal}>
-          <p className={styles.totalText}>Total:</p>
+          <p>Codigo de descuento</p>
+          <p className={styles.totalAmount}>Aplicar</p>
+        </div>
+        <p className={styles.totalText}>Total de la compra</p>
+        <div className={styles.cartTotal}>
+          <p>{total} productos</p>
           <p className={styles.totalAmount}>${total}</p>
         </div>
 
-        <div className={styles.cartButtons}>
-           
-          
-        </div>
+        <div className={styles.cartButtons}></div>
 
-        <span style={{ height: '30px' }}></span>
-        <span style={{ height: '30px' }}></span>
+        <span style={{ height: '4rem' }}></span>
       </div>
     ) : (
       <EmptyCart />
