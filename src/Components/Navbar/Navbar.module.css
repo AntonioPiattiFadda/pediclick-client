@@ -6,13 +6,6 @@
   margin: 10px;
 }
 
-.navbar__container_sticky {
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 10px;
-}
 .navbar__firstLine {
   display: flex;
   justify-content: space-between;

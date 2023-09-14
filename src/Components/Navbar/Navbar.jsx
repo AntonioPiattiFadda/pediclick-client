@@ -19,8 +19,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={
-        openMenu ? styles.navbar__container : styles.navbar__container_sticky
+      className={styles.navbar__container
       }
     >
       <MobileMenu openMenu={openMenu} />
