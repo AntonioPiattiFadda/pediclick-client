@@ -5,6 +5,7 @@ import FormCheckout from '../FormCheckout/FormCheckout';
 import EmptyCart from '../EmptyCart/EmptyCart';
 import styles from './Cart.module.css';
 import Delete from '../../assets/svg/Delete.svg';
+import ItemCount from '../ItemCount/ItemCount';
 
 const Cart = () => {
   const {
@@ -67,36 +68,28 @@ const Cart = () => {
                   <span className={styles.cardPrice}>${product.price}</span>
                 </div>
 
-                <div>
+                <div className={styles.cardInfo_deleteandcount}>
                   <img
                     src={Delete}
                     alt="Eliminar producto del carrito"
                     onClick={() => removeProduct(product.id)}
                   />
-                </div>
-                {/* 
-                <div className={styles.productDetails}>
-                  <div className={styles.productPriceAndQuantity}>
-                    <div className={styles.productQuantity}>
-                      <button
-                        className={styles.quantityButton}
-                        onClick={() =>
-                          handleMinus(product.id, product.quantity)
-                        }
-                      >
-                        -
-                      </button>
-                      <p className={styles.quantity}>{product.quantity}</p>
-                      <button
-                        className={styles.quantityButton}
-                        onClick={() => handlePlus(product.id)}
-                      >
-                        +
-                      </button>
-                    </div>
-                   
+                  <div className={styles.cartCount}>
+                    <button
+                      className={styles.quantityButton}
+                      onClick={() => handleMinus(product.id, product.quantity)}
+                    >
+                      -
+                    </button>
+                    <p className={styles.quantity}>{product.quantity}</p>
+                    <button
+                      className={styles.quantityButton}
+                      onClick={() => handlePlus(product.id)}
+                    >
+                      +
+                    </button>
                   </div>
-                </div> */}
+                </div>
               </div>
             );
           })}
@@ -108,7 +101,7 @@ const Cart = () => {
         </div>
         <p className={styles.totalText}>Total de la compra</p>
         <div className={styles.cartTotal}>
-          <p>{total} productos</p>
+          <p>{cart.length} productos</p>
           <p className={styles.totalAmount}>${total}</p>
         </div>
 
