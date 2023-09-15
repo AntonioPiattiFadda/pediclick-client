@@ -1,63 +1,74 @@
 .cardContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: calc(80vh - 110px);
+  min-height: calc(80vh - 110px);
+  overflow-x: scroll;
 }
 
 .imgContainer {
+  width: calc(100vw - 20px);
+  height: 35vh;
+  object-fit: cover;
+  border-radius: 0.3125rem;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: center;
-  width: calc(100vw - 40px);
+  align-items: center;
+  position: relative;
 }
 
 .cardImage {
-  padding: 20px;
-  width: calc(100vw - 40px);
+  width: calc(100vw - 20px);
   height: 35vh;
-  border-radius: 30px;
   object-fit: cover;
+  border-radius: 0.3125rem;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cardName {
+  position: absolute;
+  display: flex;
+  width: 10.1875rem;
+  height: 1.8125rem;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  opacity: 0.7;
+  background: #efeeee;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  top: 1rem;
+  color: #000;
+  font-family: Inter;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
 .infoContainer {
-  padding-left: 20px;
-  margin-top: -20px;
   display: flex;
-  flex-direction: column;
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-.cardDescription {
-  margin-bottom: 10px;
-}
-
-.price {
-  font-size: 18px;
-  font-weight: bold;
-}
-.priceContainer {
-  width: calc(100vw - 40px);
-  display: flex;
+  flex-direction: row;
+  width: calc(100vw - 20px);
+  height: 4rem;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 0 10px 0;
 }
-
-@media (max-width: 600px) {
-  .cardContainer {
-    flex-direction: column;
-  }
-
-  .imgContainer {
-    width: 100%;
-    padding-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .infoContainer {
-    width: 270px;
-  }
+.price {
+  display: flex;
+  width: 5.6875rem;
+  height: 2.1875rem;
+  padding: 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  background: #efeeee;
 }

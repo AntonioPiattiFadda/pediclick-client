@@ -56,20 +56,22 @@ const Cart = () => {
           {cart.map((product) => {
             return (
               <div className={styles.cartItem} key={product.id}>
-                <div className={styles.cartImage}>
-                  <img
-                    className={styles.cartImage}
-                    src={product.image}
-                    alt={product.name}
-                  />
+                <div className={styles.cartItemFirstLine}>
+                  <div className={styles.cartImage}>
+                    <img
+                      className={styles.cartImage}
+                      src={product.image}
+                      alt={product.name}
+                    />
+                  </div>
+                  <div className={styles.cardInfo_container}>
+                    <span className={styles.cardName}>{product.name}</span>
+                    <span className={styles.cardPrice}>${product.price}</span>
+                  </div>
                 </div>
-                <div className={styles.cardInfo_container}>
-                  <span className={styles.cardName}>{product.name}</span>
-                  <span className={styles.cardPrice}>${product.price}</span>
-                </div>
-
                 <div className={styles.cardInfo_deleteandcount}>
                   <img
+                     className={styles.cardInfo_deleteIcon}
                     src={Delete}
                     alt="Eliminar producto del carrito"
                     onClick={() => removeProduct(product.id)}

@@ -1,8 +1,7 @@
 .container {
   display: flex;
-  width: 100%;
-  justify-content: center;
-  /* position: absolute;
-  top: 0; */
-  background-color: white;
+  flex-direction: column;
+  padding: 10px;
+  max-height: 75vh;
+  overflow-y: scroll;
 }
