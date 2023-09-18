@@ -10,7 +10,7 @@
   font-family: Inter;
   font-size: 1.125rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin: 0 0 10px 0;
 }
@@ -57,7 +57,7 @@
   font-family: Inter;
   font-size: 0.875rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin-top: 5px;
   display: flex;
@@ -86,6 +86,10 @@
 
   margin-right: 10px;
   align-self: center;
+
+  font-size: 0.775rem;
+  font-style: normal;
+  font-weight: 600;
 }
 .cardInfo_deleteandcount {
   display: flex;
@@ -120,7 +124,7 @@
   font-family: Inter;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: normal;
 }
 .cartTotal {
@@ -133,6 +137,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.cartTotal p:first-child {
+  opacity: 0.5;
 }
 .cartTotal p {
   margin-left: 10px;
@@ -148,9 +155,9 @@
   margin-right: 10px;
 
   color: #000;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
   z-index: 10;
