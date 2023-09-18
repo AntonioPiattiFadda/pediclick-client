@@ -12,11 +12,13 @@ const ItemDetail = ({ onMinus, onAdd, item, initialValue }) => {
       <div className={styles.infoContainer}>
         <div>
           <label>
-            <input type="checkbox" name="tarea1" value="hecho" /> Tarea 1
+            <input type="checkbox" name="tarea1" value="hecho" /> x200g
           </label>
         </div>
-        <ItemCount onMinus={onMinus} onAdd={onAdd} initial={initialValue} />
-        <span className={styles.price}>${item.price}</span>
+        <div className={styles.countAndPrice}> 
+          <ItemCount onMinus={onMinus} onAdd={onAdd} initial={initialValue} />
+          <span className={styles.price}>${item.price}</span>
+        </div>
       </div>
     </div>
   );
