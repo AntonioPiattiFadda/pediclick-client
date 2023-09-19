@@ -9,18 +9,24 @@ function Footer() {
   if (location.pathname === '/cart') {
     return (
       <footer className={styles['footer-container']}>
-        <div className={styles['footer-card']}>
-          <div className={styles['footer-info']}>
-            <img
-              className={styles['footer-icon']}
-              src={CompletarPedido}
-              alt="Carrito"
-            />
-            <span>Completar pedido</span>
+        <Link className={styles['footer-link']} to={'/checkoutForm'}>
+          <div className={styles['footer-card']}>
+            <div className={styles['footer-info']}>
+              <img
+                className={styles['footer-icon']}
+                src={CompletarPedido}
+                alt="Icono de ir hacia completar el pedido"
+              />
+              <span>Completar pedido</span>
+            </div>
           </div>
-        </div>
+        </Link>
       </footer>
     );
+  }
+
+  if (location.pathname === '/checkoutForm') {
+    return;
   }
 
   return (
@@ -31,9 +37,9 @@ function Footer() {
             <img
               className={styles['footer-icon']}
               src={Carrito}
-              alt="Carrito"
+              alt="Icono de carrito"
             />
-            <span>Ir a tu carrito</span>
+            <span>Ir a tu pedido</span>
           </div>
         </div>
       </Link>

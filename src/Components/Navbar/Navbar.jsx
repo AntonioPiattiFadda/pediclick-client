@@ -1,36 +1,53 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './Navbar.module.css';
-import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import { useLocation } from 'react-router-dom';
 import Hamburguer from '../../assets/svg/hamburger.svg';
+import FlechaAtrasIcono from '../../assets/svg/FlechaAtras.svg';
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isCart = location.pathname === '/cart';
+  const isItemDetail = location.pathname.includes('/itemDetail');
+  const isCheckOutForm = location.pathname.includes('/checkoutForm');
+
   const handleOpenMenu = () => {
     setOpenMenu(!openMenu);
   };
-  const location = useLocation();
-  const isCart = location.pathname === '/cart';
-  const isItemDetail = location.pathname.includes('/itemDetail');
+  const handleClickBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div className={styles.navbar__container}>
       <MobileMenu openMenu={openMenu} />
 
       <div className={styles.navbar__firstLine}>
-        {/* //NOTE - Prmer componente */}
         <div className={styles.navbar__menuMobile}>
-          <img
-            className={styles.navbar__menuMobile_icon}
-            onClick={handleOpenMenu}
-            src={Hamburguer}
-            alt="Icono de menu"
-          />
+          {!isCheckOutForm && !isCart && !isItemDetail ? (
+            <img
+              className={styles.navbar__menuMobile_icon}
+              onClick={handleOpenMenu}
+              src={Hamburguer}
+              alt="Icono de menu"
+            />
+          ) : (
+            <img
+              className={styles.navbar__menuMobile_icon}
+              onClick={handleClickBack}
+              src={FlechaAtrasIcono}
+              alt="Icono de menu"
+            />
+          )}
         </div>
 
-        {/* //NOTE - Segundo componente */}
         <div className={styles.navbar__logo_container}>
           <div className={styles.navbar__logo}>
             <a href="/">
@@ -45,7 +62,7 @@ const Navbar = () => {
 
         <CartWidget />
       </div>
-      {!isCart && !isItemDetail && <SearchBar />}
+      {!isCheckOutForm && !isCart && !isItemDetail && <SearchBar />}
     </div>
   );
 };

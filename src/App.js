@@ -8,6 +8,8 @@ import CartContextProvider from './Components/Context/CartContext';
 import Cart from './Components/Cart/Cart';
 import NotFound from './Components/NotFound/NotFound';
 import SearchContextProvider from './Components/Context/SearchContext';
+import FormCheckout from './Components/FormCheckout/FormCheckout';
+import DeliveryAndPayForm from './Components/FormCheckout/DeliveryAndPayForm';
 
 function App() {
   return (
@@ -29,17 +31,25 @@ function App() {
               <Route path="/itemDetail/:id" element={<ItemDetailContainer />} />
 
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkoutForm" element={<FormCheckout />} />
               <Route
-                path="/formulario"
-                element={<h1> Formulario de registro</h1>}
+                path="/checkoutForm-extraInfo"
+                element={<DeliveryAndPayForm />}
               />
-
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CartContextProvider>
         </SearchContextProvider>
         <Footer />
       </BrowserRouter>
+      <div className={styles.bigScreen}>
+        <div className={styles.modal}>
+          <p>
+            La aplicación no es compatible con resoluciones tan grandes. Por
+            favor, reduzca el tamaño de la ventana del navegador.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

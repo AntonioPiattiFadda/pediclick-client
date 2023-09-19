@@ -9,7 +9,7 @@ const ItemList = ({ items }) => {
         {items.map((element) => {
           return <Item key={element.id} element={element} />;
         })}
-        <span style={{ height: '4rem' }}></span>
+        <div style={{ height: '4rem' }}></div>
       </div>
     </>
   );

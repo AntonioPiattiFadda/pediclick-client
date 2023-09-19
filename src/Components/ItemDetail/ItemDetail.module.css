@@ -32,7 +32,6 @@
   display: flex;
   width: 10.1875rem;
   height: 1.8125rem;
-  padding: 0.625rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
@@ -46,27 +45,36 @@
   font-family: Inter;
   font-size: 1.125rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+}
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .infoContainer {
   display: flex;
   flex-direction: row;
   width: calc(100vw - 20px);
-  height: 4rem;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0 10px 0;
+  margin-bottom: 5px;
 }
-input {
-  width: 2.1875rem;
-  height: 2.1875rem;
+
+.checkBox {
+  width: 1.85rem;
+  height: 1.85rem;
   flex-shrink: 0;
   border-radius: 0.3125rem;
   background: #fff;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.checkBox:checked {
+  color: green;
+  border: red 1px solid;
 }
 label {
   display: flex;
