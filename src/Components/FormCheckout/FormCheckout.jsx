@@ -61,23 +61,27 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
     yupObject.adress = Yup.string().required();
     yupObject.adressNumber = Yup.number().required();
   }
+  const initialValues = {
+    nombre: '',
+    email: '',
+    phone: '',
+    homeDelivery: false,
+    storeDelivery: true,
+    adress: '',
+    adressNumber: null,
+    neighborhood: '',
+    apartment: '',
+    pay: '',
+    cashPayment: 0,
+  };
+  if (checkbox1Selected) {
+    initialValues.homeDelivery = true;
+    initialValues.storeDelivery = false;
+  }
 
   const { handleSubmit, handleChange, values, setFieldValue, errors } =
     useFormik({
-      initialValues: {
-        nombre: '',
-        email: '',
-        phone: '',
-        homeDelivery: false,
-        storeDelivery: false,
-        // deliveryDay: '',
-        adress: '',
-        adressNumber: null,
-        neighborhood: '',
-        apartment: '',
-        pay: '',
-        cashPayment: 0,
-      },
+      initialValues: initialValues,
 
       validationSchema: Yup.object(yupObject),
 
