@@ -252,10 +252,7 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
                   checked={checkbox1Selected}
                   name="homeDelivery"
                   id="homeDelivery"
-                  onChange={() => {
-                    handleCheckboxChange(1);
-                    handleChange();
-                  }}
+                  onChange={() => handleCheckboxChange(1)}
                   value={values.homeDelivery}
                 />{' '}
                 <span>Entrega a domicilio</span>
@@ -269,10 +266,7 @@ const FormCheckout = ({ getCartTotalPrice, cart, clearCart }) => {
                   value={values.storeDelivery}
                   name="storeDelivery"
                   id="storeDelivery"
-                  onChange={() => {
-                    handleCheckboxChange(2);
-                    handleChange();
-                  }}
+                  onChange={() => handleCheckboxChange(2)}
                 />{' '}
                 <span>Recoger en tienda</span>
               </div>
