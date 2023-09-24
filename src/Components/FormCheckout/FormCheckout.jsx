@@ -82,8 +82,6 @@ const FormCheckout = () => {
     validationSchema: Yup.object(yupObject),
 
     onSubmit: (data) => {
-      console.log(values);
-
       let total = getCartTotalPrice();
       console.log(data);
       let order = {

@@ -151,7 +151,7 @@ function CalculateShipping() {
       </div>
 
       <div className={styles.formContainer}>
-        <form className={styles.form} action="">
+        <div className={styles.form} action="">
           <Autocomplete
             bounds={autocompleteBounds}
             restrictions={restrictions}
@@ -162,7 +162,7 @@ function CalculateShipping() {
           <button type="button" colorScheme="pink" onClick={calculateRoute}>
             Calcular envio
           </button>
-        </form>
+        </div>
         {price === 9999 && (
           <span
             style={{
