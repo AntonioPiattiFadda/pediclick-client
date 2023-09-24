@@ -5,6 +5,7 @@ import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
 import { ProductsSkeleton } from '../../Utils/Skeletons';
 import NotFound from '../NotFound/NotFound';
+import GoogleMapComponent from '../Maps/CalculateShipping';
 
 const transformProductsData = (data) => {
   return data.map((product) => ({

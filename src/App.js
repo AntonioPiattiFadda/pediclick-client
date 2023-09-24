@@ -9,7 +9,7 @@ import Cart from './Components/Cart/Cart';
 import NotFound from './Components/NotFound/NotFound';
 import SearchContextProvider from './Components/Context/SearchContext';
 import FormCheckout from './Components/FormCheckout/FormCheckout';
-import DeliveryAndPayForm from './Components/FormCheckout/DeliveryAndPayForm';
+import GoogleMapComponent from './Components/Maps/CalculateShipping';
 
 function App() {
   return (
@@ -32,10 +32,6 @@ function App() {
 
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkoutForm" element={<FormCheckout />} />
-              <Route
-                path="/checkoutForm-extraInfo"
-                element={<DeliveryAndPayForm />}
-              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CartContextProvider>
