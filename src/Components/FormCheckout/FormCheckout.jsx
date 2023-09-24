@@ -11,7 +11,7 @@ import { CartContext } from '../Context/CartContext';
 import CalculateShipping from '../Maps/CalculateShipping';
 
 const FormCheckout = () => {
-  const [checkbox1Selected, setCheckbox1Selected] = useState(true);
+  const [checkbox1Selected, setCheckbox1Selected] = useState(false);
   const [checkbox2Selected, setCheckbox2Selected] = useState(false);
   const [checkbox3Selected, setCheckbox3Selected] = useState(false);
   const [checkbox4Selected, setCheckbox4Selected] = useState(false);
@@ -79,7 +79,6 @@ const FormCheckout = () => {
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: initialValues,
-
     validationSchema: Yup.object(yupObject),
 
     onSubmit: (data) => {
