@@ -11,6 +11,7 @@ const Cart = () => {
     addOneUnitPriceQuantity,
     minusOneUnitPriceQuantity,
     removeUnitPrice,
+    clearCart,
   } = useContext(CartContext);
   const total = getCartTotalPrice();
 
@@ -69,6 +70,13 @@ const Cart = () => {
           });
           return productValue;
         })}
+      </div>
+
+      <div className={styles.cartTotal}>
+        <p>Vaciar Carrito</p>
+        <button onClick={clearCart} className={styles.totalAmount}>
+          Vaciar
+        </button>
       </div>
 
       <div className={styles.cartTotal}>
