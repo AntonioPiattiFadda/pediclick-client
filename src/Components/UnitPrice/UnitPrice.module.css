@@ -1,0 +1,43 @@
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  width: calc(100vw - 20px);
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.checkBox {
+  width: 1.85rem;
+  height: 1.85rem;
+  flex-shrink: 0;
+  border-radius: 0.3125rem;
+  background: #fff;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.checkBox:checked {
+  color: green;
+  border: red 1px solid;
+}
+label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.countAndPrice {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.price {
+  display: flex;
+  width: 5.6875rem;
+  height: 2.1875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  font-weight: 700;
+  border-radius: 1.875rem;
+  background: #efeeee;
+}

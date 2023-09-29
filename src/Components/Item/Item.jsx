@@ -3,6 +3,13 @@ import styles from './Item.module.css';
 import { Link } from 'react-router-dom';
 
 const Item = ({ element }) => {
+  //FIXME - Me tengo que asegurar que todos los productos tengan unitPrice
+
+  // const bestPrice = element.unit_price.map((UnitPrice) => {
+  //   return UnitPrice.value;
+  // });
+  // console.log(bestPrice);
+
   return (
     <>
       <Link

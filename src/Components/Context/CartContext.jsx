@@ -38,7 +38,6 @@ const CartContextProvider = ({ children }) => {
   };
 
   const removeProduct = (id) => {
-    // Me fallaba porque le estaba haciendo un splice a cart que es un estado.
     const deletedProductIndex = cart.findIndex((product) => product.id === id);
     const newArray = [...cart];
     newArray.splice(deletedProductIndex, 1);
@@ -48,13 +47,6 @@ const CartContextProvider = ({ children }) => {
   const getCartQuantity = () => {
     const total = cart.reduce((acc, element) => {
       return acc + element.quantity;
-    }, 0);
-    return total;
-  };
-
-  const getCartTotalPrice = () => {
-    const total = cart.reduce((acc, element) => {
-      return acc + element.quantity * element.price;
     }, 0);
     return total;
   };
@@ -93,6 +85,162 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const addUnitPriceToProduct = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+      if (existingUnitPriceIndex !== -1) {
+        updatedCart[existingProductIndex].unit_price[
+          existingUnitPriceIndex
+        ].quantity = 0;
+      } else {
+        unitPrice.quantity = 1;
+        updatedCart[existingProductIndex].unit_price.push(unitPrice);
+      }
+    } else {
+      const newUnitPrice = {
+        ...unitPrice,
+        quantity: 1,
+      };
+      const newProduct = {
+        ...product,
+        unit_price: [newUnitPrice],
+      };
+      updatedCart.push(newProduct);
+    }
+    setCart(updatedCart);
+  };
+
+  const removeUnitPriceFromProduct = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+
+      if (existingUnitPriceIndex !== -1) {
+        // Remove the unit price if it exists in the product's unit_price array
+        updatedCart[existingProductIndex].unit_price.splice(
+          existingUnitPriceIndex,
+          1
+        );
+
+        // If the product has no unit prices left, remove the entire product from the cart
+        if (updatedCart[existingProductIndex].unit_price.length === 0) {
+          updatedCart.splice(existingProductIndex, 1);
+        }
+
+        setCart(updatedCart);
+      }
+    }
+  };
+
+  const isUnitPriceInCart = (productName, unitPrice) => {
+    return cart.some((cartItem) => {
+      return (
+        cartItem.name === productName &&
+        cartItem.unit_price.some((cartUnitPrice) => {
+          return (
+            cartUnitPrice.name === unitPrice.name && cartUnitPrice.quantity > 0
+          );
+        })
+      );
+    });
+  };
+
+  const getQuantityForUnitPrice = (product, unitPrice) => {
+    const productInCart = cart.find((item) => item.id === product.id);
+    if (productInCart) {
+      const unitPriceInProduct = productInCart.unit_price.find(
+        (up) => up.id === unitPrice.id
+      );
+      if (unitPriceInProduct) {
+        return unitPriceInProduct.quantity || 0;
+      }
+    }
+    return 0;
+  };
+
+  const addOneUnitPriceQuantity = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+      if (existingUnitPriceIndex !== -1) {
+        updatedCart[existingProductIndex].unit_price[
+          existingUnitPriceIndex
+        ].quantity += 1;
+      }
+    }
+
+    setCart(updatedCart);
+  };
+  const minusOneUnitPriceQuantity = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+      if (existingUnitPriceIndex !== -1) {
+        if (
+          updatedCart[existingProductIndex].unit_price[existingUnitPriceIndex]
+            .quantity === 1
+        ) {
+          return;
+        }
+        updatedCart[existingProductIndex].unit_price[
+          existingUnitPriceIndex
+        ].quantity -= 1;
+      }
+    }
+    setCart(updatedCart);
+  };
+
+  const removeUnitPrice = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+      if (existingUnitPriceIndex !== -1) {
+        updatedCart[existingProductIndex].unit_price.splice(
+          existingUnitPriceIndex,
+          1
+        );
+      }
+    }
+    setCart(updatedCart);
+  };
+
+  const getCartTotalPrice = () => {
+    const totalPerProduct = cart.map((product) => {
+      const totalPerUnitPrice = product.unit_price.reduce((acc, unitPrice) => {
+        return acc + unitPrice.quantity * unitPrice.value;
+      }, 0);
+      return totalPerUnitPrice;
+    });
+    return totalPerProduct;
+  };
+
   const data = {
     cart,
     addToCart,
@@ -103,6 +251,13 @@ const CartContextProvider = ({ children }) => {
     getProductQuantityByID,
     addOneElement,
     minusOneElement,
+    addUnitPriceToProduct,
+    removeUnitPriceFromProduct,
+    isUnitPriceInCart,
+    getQuantityForUnitPrice,
+    addOneUnitPriceQuantity,
+    minusOneUnitPriceQuantity,
+    removeUnitPrice,
   };
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
 };

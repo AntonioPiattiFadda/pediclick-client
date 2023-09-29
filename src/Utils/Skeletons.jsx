@@ -360,3 +360,28 @@ export const DetailProductsSkeleton = () => {
     </Box>
   );
 };
+
+export const ShippingCostSkeleton = () => {
+  return (
+    <Box
+      sx={{
+        height: '350px',
+        width: 'calc(100vw - 20px)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Skeleton
+        sx={{
+          //NOTE - Poner un skeleton rounded
+          width: 'calc(100vw - 20px)',
+          height: '350px',
+          border: '1px solid lightgray',
+          marginTop: '-40px',
+        }}
+      />
+    </Box>
+  );
+};

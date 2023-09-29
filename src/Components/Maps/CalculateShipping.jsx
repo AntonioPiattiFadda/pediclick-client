@@ -7,6 +7,7 @@ import {
 } from '@react-google-maps/api';
 import { useEffect, useRef, useState } from 'react';
 import styles from './CalculateShipping.module.css';
+import { ShippingCostSkeleton } from '../../Utils/Skeletons';
 
 const center = { lat: -31.427103, lng: -64.181931 };
 const center2 = { lat: -31.421103, lng: -64.181141 };
@@ -91,7 +92,7 @@ function CalculateShipping() {
   }, [distance]);
 
   if (!isLoaded) {
-    return <h1>Cargando ...</h1>;
+    return <ShippingCostSkeleton />;
   }
 
   async function calculateRoute() {
@@ -140,6 +141,7 @@ function CalculateShipping() {
             streetViewControl: false,
             mapTypeControl: false,
             fullscreenControl: false,
+            draggable: false,
           }}
           onLoad={(map) => setMap(map)}
         >
