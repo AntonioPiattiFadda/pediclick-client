@@ -128,13 +128,11 @@ const CartContextProvider = ({ children }) => {
       ].unit_price.findIndex((up) => up.id === unitPrice.id);
 
       if (existingUnitPriceIndex !== -1) {
-        // Remove the unit price if it exists in the product's unit_price array
         updatedCart[existingProductIndex].unit_price.splice(
           existingUnitPriceIndex,
           1
         );
 
-        // If the product has no unit prices left, remove the entire product from the cart
         if (updatedCart[existingProductIndex].unit_price.length === 0) {
           updatedCart.splice(existingProductIndex, 1);
         }
@@ -221,11 +219,15 @@ const CartContextProvider = ({ children }) => {
       const existingUnitPriceIndex = updatedCart[
         existingProductIndex
       ].unit_price.findIndex((up) => up.id === unitPrice.id);
+
       if (existingUnitPriceIndex !== -1) {
         updatedCart[existingProductIndex].unit_price.splice(
           existingUnitPriceIndex,
           1
         );
+      }
+      if (updatedCart[existingProductIndex].unit_price.length === 0) {
+        updatedCart.splice(existingProductIndex, 1);
       }
     }
     setCart(updatedCart);

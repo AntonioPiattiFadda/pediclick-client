@@ -5,10 +5,13 @@ import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
 import { ProductsSkeleton } from '../../Utils/Skeletons';
 import NotFound from '../NotFound/NotFound';
-import GoogleMapComponent from '../Maps/CalculateShipping';
 
 const transformProductsData = (data) => {
-  return data.map((product) => ({
+  const productsWithUnitPrice = data.filter((product) => {
+    return product.unit_price.length > 0;
+  });
+
+  return productsWithUnitPrice.map((product) => ({
     id: product.id,
     name: product.name,
     image: product.image,
