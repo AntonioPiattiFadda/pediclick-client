@@ -71,14 +71,14 @@ const Cart = () => {
           return productValue;
         })}
       </div>
-
-      <div className={styles.cartTotal}>
+      {/* NOTE - Lo puse porque a veces el que se guarde en el local storage no se
+      borra y queda el carrito con el producto que se borro */}
+      {/* <div className={styles.cartTotal}>
         <p>Vaciar Carrito</p>
         <button onClick={clearCart} className={styles.totalAmount}>
           Vaciar
         </button>
-      </div>
-
+      </div> */}
       <div className={styles.cartTotal}>
         <p>Codigo de descuento</p>
         <p className={styles.totalAmount}>Aplicar</p>
@@ -88,9 +88,7 @@ const Cart = () => {
         <p>{cart.length} productos</p>
         <p className={styles.totalAmount}>${total}</p>
       </div>
-
       <div className={styles.cartButtons}></div>
-
       <div style={{ height: '4rem' }}></div>
     </div>
   ) : (
