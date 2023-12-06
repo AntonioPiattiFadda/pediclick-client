@@ -1,71 +1,173 @@
-/* MobileMenu.module.css */
 .MobileMenu {
   position: absolute;
-  z-index: 1001;
-  top: 65px;
+  z-index: 2000;
+  top: 60px;
   left: 0;
-  width: 200px;
-  height: calc(100% - 65px);
-  background-color: rgb(200, 200, 200);
+  width: 207px;
+  height: calc(100vh - 60px);
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
   transition: ease-in 0.4s all;
-}
-
-.MobileMenu ul {
-  list-style: none;
-  padding: 0;
-  height: calc(100% - 36px);
+  border-radius: 0px 20px 20px 0px;
+  background: #fefefe;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.closeIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.linksWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  height: 200px;
+  gap: 10px;
+}
+.linksIcons {
+  border-radius: 30px;
+  opacity: 0.7;
+  background: #6f926c;
+  width: 40px;
+  padding: 5px;
+  height: 100%;
+}
+.linksIcons ul {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.linksIcons ul li {
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #fefefe;
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25) inset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.linksIcons ul li img {
+}
+.linksAnchors {
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 5px;
+}
+.linksAnchors ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.linksAnchors ul li {
+  border-bottom: 1px solid #001019;
+  display: flex;
+  padding: 10px;
+}
+.linksAnchors ul li:last-child {
+  border-bottom: none;
+}
+.linksAnchors a {
+  text-decoration: none;
+  color: #001019;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.callToActionWrapper {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.callToActionWrapper span {
+  display: flex;
+  width: 90%;
+  height: 30px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: #e4e4e4;
+  white-space: nowrap;
+}
+.callToActionWrapper a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  width: 136px;
+  height: 20px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: rgba(111, 146, 108, 0.7);
+}
+
+.MobileMenuClosed {
+  position: absolute;
+  z-index: 1000;
+  top: 60px;
+  left: 0;
+  width: 0px;
+  height: calc(100vh - 60px);
+  transition: ease-in 0.4s all;
+  border-radius: 0px 20px 20px 0px;
+  background: #fefefe;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 
-.MobileMenu li {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  position: relative; /* Agregar posición relativa para que el borde sea relativo al elemento */
-  transition: border-bottom 0.2s ease-in-out;
-}
-.MobileMenu li::after {
-  content: '';
+.mobileMenuOverlay {
   position: absolute;
-  bottom: 15px;
-  width: 0;
-  height: 1px;
-  background-color: green; /* Color del borde */
-  transition: width 0.2s ease-in-out; /* Transición para el cambio de ancho del borde */
-}
-
-.MobileMenu li:hover::after {
-  width: calc(100% - 60px); /* Mostrar el borde hacia los costados */
-  left: 20px; /* Alinear el borde desde los costados */
-}
-
-.MobileMenu a {
-  text-decoration: none;
-  color: #333333;
-}
-.MobileMenu li:hover {
-  color: red;
-}
-
-/* .MobileMenu-overlay {
-  position: absolute;
-  top: 65px;
+  z-index: 1100;
+  top: 60px;
   left: 0;
-  width: calc(100vw);
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-} */
-
-.MobileMenuIcons {
-  width: 16px;
-  height: 16px;
-  padding-right: 10px;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background: rgba(111, 146, 108, 0.7);
 }
-.MobileMenuClosed {
+.mobileMenuOverlayClosed {
   display: none;
-  width: 0px;
+}
+.blockCartOverelay {
+  position: absolute;
+  z-index: 500;
+  top: 0;
+  right: 0;
+  width: calc(100vw - 100px);
+  height: 100px;
+  background: transparent;
+}
+.blockCartOverelayClosed {
+  display: none;
 }

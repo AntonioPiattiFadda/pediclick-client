@@ -114,10 +114,17 @@
   margin-right: 10px;
   align-self: flex-end;
   padding-top: 10px;
+  cursor: pointer;
+}
+.cardInfo_deleteIcon:hover {
+  opacity: 0.5;
 }
 
 .quantityButton {
   color: black;
+}
+.quantityButton:hover {
+  opacity: 0.5;
 }
 .totalText {
   color: #000;

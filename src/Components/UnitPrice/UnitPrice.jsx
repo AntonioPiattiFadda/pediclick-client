@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './UnitPrice.module.css';
 import ItemCount from '../ItemCount/ItemCount';
 import { CartContext } from '../Context/CartContext';
+import AddToCartModal from '../Modal/AddToCart';
 
 const UnitPrice = ({ unitPrice, item }) => {
+  const [showModal, setShowModal] = useState(false);
   const {
     isUnitPriceInCart,
     addUnitPriceToProduct,
@@ -20,6 +22,10 @@ const UnitPrice = ({ unitPrice, item }) => {
       removeUnitPriceFromProduct(item, unitPrice);
     } else {
       addUnitPriceToProduct(item, unitPrice);
+      setShowModal(true);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 2000);
     }
   };
 
@@ -56,6 +62,7 @@ const UnitPrice = ({ unitPrice, item }) => {
         ) : null}
         <span className={styles.price}>${unitPrice.value}</span>
       </div>
+      {showModal && <AddToCartModal />}
     </div>
   );
 };

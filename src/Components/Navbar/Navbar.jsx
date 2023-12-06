@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar__container}>
-      <MobileMenu openMenu={openMenu} />
+      <MobileMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
 
       <div className={styles.navbar__firstLine}>
         <div className={styles.navbar__menuMobile}>

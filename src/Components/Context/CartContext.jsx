@@ -240,7 +240,10 @@ const CartContextProvider = ({ children }) => {
       }, 0);
       return totalPerUnitPrice;
     });
-    return totalPerProduct;
+    const totalAllProducts = totalPerProduct.reduce((acc, total) => {
+      return acc + total;
+    }, 0);
+    return totalAllProducts;
   };
 
   const data = {

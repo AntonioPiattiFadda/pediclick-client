@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ItemDetail.module.css';
 import UnitPrice from '../UnitPrice/UnitPrice';
 
-const ItemDetail = ({ item, addUnitPriceToProduct, cart }) => {
+const ItemDetail = ({ item, cart }) => {
   const unitPrice = item.unit_price;
 
   return (

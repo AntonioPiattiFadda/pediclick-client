@@ -3,6 +3,7 @@ import { CartContext } from '../Context/CartContext';
 import EmptyCart from '../EmptyCart/EmptyCart';
 import styles from './Cart.module.css';
 import Delete from '../../assets/svg/Delete.svg';
+import RemoveFromCartModal from '../Modal/RemoveFromCart';
 
 const Cart = () => {
   const {
@@ -11,9 +12,27 @@ const Cart = () => {
     addOneUnitPriceQuantity,
     minusOneUnitPriceQuantity,
     removeUnitPrice,
-    clearCart,
   } = useContext(CartContext);
   const total = getCartTotalPrice();
+  const [showModal, setShowModal] = React.useState(false);
+  const [productToDelete, setProductToDelete] = React.useState(null);
+
+  const handleDelete = (product, unitPrice) => {
+    setProductToDelete({ product, unitPrice });
+    setShowModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      const { product, unitPrice } = productToDelete;
+      removeUnitPrice(product, unitPrice);
+      setShowModal(false);
+    }
+  };
+
+  const cancelDelete = () => {
+    setShowModal(false);
+  };
 
   return cart.length ? (
     <div className={styles.cartContainer}>
@@ -43,7 +62,7 @@ const Cart = () => {
                     className={styles.cardInfo_deleteIcon}
                     src={Delete}
                     alt="Eliminar producto del carrito"
-                    onClick={() => removeUnitPrice(product, unitPrice)}
+                    onClick={() => handleDelete(product, unitPrice)}
                   />
                   <div className={styles.cartCount}>
                     <button
@@ -79,10 +98,11 @@ const Cart = () => {
           Vaciar
         </button>
       </div> */}
-      <div className={styles.cartTotal}>
+      {/*NOTE - Codigo de descuento para la V2 */}
+      {/* <div className={styles.cartTotal}>
         <p>Codigo de descuento</p>
         <p className={styles.totalAmount}>Aplicar</p>
-      </div>
+      </div> */}
       <p className={styles.totalText}>Total de la compra</p>
       <div className={styles.cartTotal}>
         <p>{cart.length} productos</p>
@@ -90,6 +110,13 @@ const Cart = () => {
       </div>
       <div className={styles.cartButtons}></div>
       <div style={{ height: '4rem' }}></div>
+      {showModal && (
+        <RemoveFromCartModal
+          confirmDelete={confirmDelete}
+          cancelDelete={cancelDelete}
+          productToDelete={productToDelete}
+        />
+      )}
     </div>
   ) : (
     <EmptyCart />
