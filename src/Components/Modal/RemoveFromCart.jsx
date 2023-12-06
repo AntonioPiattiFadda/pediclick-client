@@ -9,6 +9,7 @@ const RemoveFromCartModal = ({
   productToDelete,
 }) => {
   const { product, unitPrice } = productToDelete;
+  if (!product || !unitPrice) return null;
   return (
     <div className={styles.container}>
       <div className={styles.leftInfo}>
@@ -26,8 +27,12 @@ const RemoveFromCartModal = ({
       </div>
       <div className={styles.rigthInfo}>
         <span>Ésta acción no puede deshacerse</span>
-        <button className={styles.confirmButton} onClick={confirmDelete}>Confirmar</button>
-        <button className={styles.cancelButton} onClick={cancelDelete}>Cancelar</button>
+        <button className={styles.confirmButton} onClick={confirmDelete}>
+          Confirmar
+        </button>
+        <button className={styles.cancelButton} onClick={cancelDelete}>
+          Cancelar
+        </button>
       </div>
     </div>
   );

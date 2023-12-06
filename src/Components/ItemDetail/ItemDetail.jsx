@@ -7,9 +7,12 @@ const ItemDetail = ({ item, cart }) => {
 
   return (
     <div className={styles.cardContainer}>
-      <div className={styles.imgContainer}>
-        <span className={styles.cardName}>{item.name}</span>
-        <img className={styles.cardImage} src={item.image} alt="" />
+      <div>
+        <div className={styles.imgContainer}>
+          <span className={styles.cardName}>{item.name}</span>
+          <img className={styles.cardImage} src={item.image} alt="" />
+        </div>
+        <p className={styles.cardDescription}>{item.description}</p>
       </div>
       <div className={styles.priceContainer}>
         {unitPrice

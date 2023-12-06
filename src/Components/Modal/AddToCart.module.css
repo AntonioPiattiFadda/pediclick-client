@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 325px;
@@ -13,7 +13,6 @@
   align-items: center;
   gap: 5px;
   padding: 10px;
-  border: solid 1px #0010195d;
 }
 .rigthInfo {
   display: flex;
