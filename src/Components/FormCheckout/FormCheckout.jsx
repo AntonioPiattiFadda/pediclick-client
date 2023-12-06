@@ -107,15 +107,19 @@ const FormCheckout = () => {
         return;
       }
 
+      console.log('order', order);
+      console.log('buyer', data);
+      console.log('total', total);
       setOrderId(newOrderId);
       setBuyer(data);
       setTotal(total);
       setOrderInfo(cart);
       // setSuccesBuy({ ...successBuy, active: true });
       const getCartItemDetails = (cart) => {
-        const itemDetails = cart.map(
-          (item) => `${item.name} (X${item.quantity})`
-        );
+        const itemDetails = cart.map((item) => console.log(item));
+        //FIXME - La quentity esta en cada UnitPrice
+
+        
         return itemDetails.join(`,
                 `);
       };
@@ -143,10 +147,8 @@ const FormCheckout = () => {
         ${getCartItemDetails(cart)}.
       
         Seleccioné retirar en tienda.
-        Retiro el día: XXX
         
         Pago: ${values.pay}.
-        Pago con: XXX
         
         Total: ${total}.`;
       }
