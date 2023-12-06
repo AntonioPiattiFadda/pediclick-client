@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Formulario.module.css';
 import DeliveryIcono from '../../assets/svg/delivery.svg';
 import EntregaIcono from '../../assets/svg/entregaLocal.svg';
@@ -47,6 +47,9 @@ const FormCheckout = () => {
     paymentErrorMessage: '',
   });
 
+  const [shippingCost, setShippingCost] = useState(0);
+  const [adress, setAdress] = useState('');
+
   const yupObject = {
     nombre: Yup.string()
       .min(6, 'El nombre debe tener al menos 6 caracteres')
@@ -59,23 +62,23 @@ const FormCheckout = () => {
       .typeError('El teléfono tiene que ser un número')
       .required('El numero de telefono es obligatorio'),
   };
-  if (checkbox1Selected) {
-    yupObject.homeDelivery = Yup.boolean();
-    yupObject.adress = Yup.string().required();
-    yupObject.adressNumber = Yup.number().required();
-  }
+  // if (checkbox1Selected) {
+  //   yupObject.homeDelivery = Yup.boolean();
+  //   yupObject.adress = Yup.string().required();
+  //   yupObject.adressNumber = Yup.number().required();
+  // }
   const initialValues = {
     nombre: '',
     email: '',
     phone: '',
   };
-  if (checkbox1Selected) {
-    initialValues.adress = '';
-    initialValues.adressNumber = null;
-  } else if (checkbox2Selected) {
-    delete initialValues.adress;
-    delete initialValues.adressNumber;
-  }
+  // if (checkbox1Selected) {
+  //   initialValues.adress = '';
+  //   initialValues.adressNumber = null;
+  // } else if (checkbox2Selected) {
+  //   delete initialValues.adress;
+  //   delete initialValues.adressNumber;
+  // }
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: initialValues,
@@ -83,7 +86,6 @@ const FormCheckout = () => {
 
     onSubmit: (data) => {
       let total = getCartTotalPrice();
-      console.log(data);
       let order = {
         buyer: data,
         items: cart,
@@ -107,24 +109,31 @@ const FormCheckout = () => {
         return;
       }
 
-      console.log('order', order);
-      console.log('buyer', data);
-      console.log('total', total);
       setOrderId(newOrderId);
       setBuyer(data);
       setTotal(total);
       setOrderInfo(cart);
-      // setSuccesBuy({ ...successBuy, active: true });
       const getCartItemDetails = (cart) => {
-        const itemDetails = cart.map((item) => console.log(item));
-        //FIXME - La quentity esta en cada UnitPrice
-
-        
+        const itemDetails = cart.map((item) => {
+          console.log(item.unit_price);
+          const prices = item.unit_price.map((price) => {
+            return price.name + ' X' + price.quantity;
+          });
+          console.log(prices);
+          return item.name + ': ' + prices;
+        });
         return itemDetails.join(`,
                 `);
       };
 
       let message = '';
+      let payment = '';
+
+      if (checkbox3Selected) {
+        payment = 'Efectivo';
+      } else if (checkbox4Selected) {
+        payment = 'Transferencia';
+      }
 
       if (checkbox1Selected) {
         message += `¡Hola! Quisiera hacer el siguiente pedido a nombre de ${
@@ -132,25 +141,25 @@ const FormCheckout = () => {
         }:
         ${getCartItemDetails(cart)}.
       
-        Seleccioné entrega a domicilio. 
-        Dirección: ${values.adress}, ${values.adressNumber}
-        Retiro el día: XXX
+Seleccioné entrega a domicilio. 
+Dirección: ${adress}, 
         
-        Pago: ${values.pay}.
-        Pago con: XXX
+Pago: ${payment}.
         
-        Total: ${total}.`;
+Total: $ ${total}.`;
       } else if (checkbox2Selected) {
         message += `¡Hola! Quisiera hacer el siguiente pedido a nombre de ${
           values.nombre
         }:
-        ${getCartItemDetails(cart)}.
+Email: ${values.email},
+Teléfono: ${values.phone},
+Pedido: ${getCartItemDetails(cart)}.
       
-        Seleccioné retirar en tienda.
+Seleccioné retirar en tienda.
+
+Pago: ${payment}.
         
-        Pago: ${values.pay}.
-        
-        Total: ${total}.`;
+Total: $${total}.`;
       }
       const sendWhatsAppMessage = () => {
         const whatsappLink = `https://wa.me/${3516192831}?text=${encodeURIComponent(
@@ -300,8 +309,12 @@ const FormCheckout = () => {
           )}
           {checkbox1Selected && (
             <>
-              <CalculateShipping />
-              <div className={styles.formGroup}>
+              <CalculateShipping
+                setAdress={setAdress}
+                setShippingCost={setShippingCost}
+                shippingCost={shippingCost}
+              />
+              {/* <div className={styles.formGroup}>
                 <label className={styles.formGroupLabel} htmlFor="adress">
                   Calle:
                 </label>
@@ -311,7 +324,7 @@ const FormCheckout = () => {
                   name="adress"
                   id="adress"
                   onChange={handleChange}
-                  value={values.adress}
+                  value={adress}
                 />
                 {errors.adress ? (
                   <span className={styles.error}>{errors.adress}</span>
@@ -332,7 +345,7 @@ const FormCheckout = () => {
                 {errors.adressNumber ? (
                   <span className={styles.error}>{errors.adressNumber}</span>
                 ) : null}
-              </div>
+              </div> */}
               {/* <div className={styles.formGroup}>
                 <label className={styles.formGroupLabel} htmlFor="apartment">
                   Departamento: (opcional)

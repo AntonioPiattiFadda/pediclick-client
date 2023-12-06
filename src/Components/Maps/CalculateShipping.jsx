@@ -23,9 +23,11 @@ const restrictions = {
 const options = {
   strictBounds: true,
 };
-const storeDirection = 'Ingeniero Lopez 546';
 
-function CalculateShipping() {
+//NOTE - Traer la direccion del local de la base de datos
+const storeDirection = 'Ingeniero Lopez 100';
+
+function CalculateShipping({ setShippingCost, shippingCost, setAdress }) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     //NOTE - Places es la libreria donde se encuentra el Autocomplete de Google Maps cuando buscamos una direccion
@@ -35,7 +37,7 @@ function CalculateShipping() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
-  const [price, setPrice] = useState(null);
+  const [error, setError] = useState(false);
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef();
@@ -86,9 +88,9 @@ function CalculateShipping() {
         break;
 
       default:
-        price = 9999;
+        price = null;
     }
-    setPrice(price);
+    setShippingCost(price);
   }, [distance]);
 
   if (!isLoaded) {
@@ -96,10 +98,13 @@ function CalculateShipping() {
   }
 
   async function calculateRoute() {
-    if (destiantionRef.current.value === '') {
+    const isEmpty = destiantionRef.current.value === '';
+    const hasNumber = /\d/.test(destiantionRef.current.value);
+    if (isEmpty && !hasNumber) {
+      alert('Debes ingresar una direccion valida');
+      setError(true);
       return;
     }
-
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
@@ -126,6 +131,8 @@ function CalculateShipping() {
     setDistance(distanceNumeric);
     setDirectionsResponse(results);
     setDuration(results.routes[0].legs[0].duration.text);
+    setAdress(destiantionRef.current.value);
+    setError(false);
   }
 
   return (
@@ -159,19 +166,34 @@ function CalculateShipping() {
             restrictions={restrictions}
             options={options}
           >
-            <input type="text" placeholder="Destination" ref={destiantionRef} />
+            <input
+              type="text"
+              placeholder="Dirección de envío"
+              ref={destiantionRef}
+            />
           </Autocomplete>
           <button type="button" colorScheme="pink" onClick={calculateRoute}>
             Calcular envio
           </button>
         </div>
-        {price === 9999 && (
+        {shippingCost === null && (
+          <span
+            style={{
+              margin: '10px',
+              textAlign: 'center',
+            }}
+          >
+            Lamentablemente no llegamos a esa zona. Puedes retirar en el local.
+          </span>
+        )}
+
+        {distance && shippingCost !== null && (
           <span
             style={{
               margin: '10px',
             }}
           >
-            Lamentablemente, no realizamos envios a más de 3 km de distancia
+            Precio: ${shippingCost}{' '}
           </span>
         )}
 
@@ -181,17 +203,19 @@ function CalculateShipping() {
               margin: '10px',
             }}
           >
-            Precio: ${price}{' '}
+            Distancia: {distance} mts
           </span>
         )}
 
-        {distance && (
+        {error && (
           <span
             style={{
               margin: '10px',
+              color: 'red',
+              textAlign: 'center',
             }}
           >
-            Distance: {distance} mts
+            Debes ingresar una direccion valida y que contenga números
           </span>
         )}
 
