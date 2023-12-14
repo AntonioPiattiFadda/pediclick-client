@@ -16,9 +16,8 @@ const transformProductsData = (data) => {
     name: product.name,
     image: product.image,
     description: product.description,
-    price: product.price,
     category: product.category.name,
-    blocked: product.blocked,
+    unit_price: product.unit_price,
   }));
 };
 

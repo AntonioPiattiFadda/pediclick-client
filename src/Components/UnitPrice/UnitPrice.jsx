@@ -40,14 +40,18 @@ const UnitPrice = ({ unitPrice, item }) => {
     <div className={styles.infoContainer}>
       <div>
         <label>
-          <input
-            className={styles.checkBox}
-            type="checkbox"
-            name="tarea1"
-            value="hecho"
-            onChange={handleCheckboxChange}
-            checked={isItemInCart}
-          />{' '}
+          {unitPrice.blocked ? (
+            <span className={styles.checkBoxNoStock}></span>
+          ) : (
+            <input
+              className={styles.checkBox}
+              type="checkbox"
+              name="tarea1"
+              value="hecho"
+              onChange={handleCheckboxChange}
+              checked={isItemInCart}
+            />
+          )}
           {unitPrice.name}
         </label>
       </div>
@@ -60,7 +64,13 @@ const UnitPrice = ({ unitPrice, item }) => {
             initial={quantity || 0}
           />
         ) : null}
-        <span className={styles.price}>${unitPrice.value}</span>
+        {unitPrice.blocked ? (
+          <span className={styles.noStock}>
+            SIN STOCK <br /> DISPONIBLE
+          </span>
+        ) : (
+          <span className={styles.price}>${unitPrice.value}</span>
+        )}
       </div>
       {showModal && <AddToCartModal />}
     </div>
