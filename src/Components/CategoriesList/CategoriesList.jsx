@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import style from './CategoriesList.module.css';
 import { getAllCategoriesItems } from '../../Services/categories.service';
 import { SearchContext } from '../Context/SearchContext';
+import endPoints from '../../Services';
 
 const CategoriesList = () => {
   const [categories, setCategories] = useState([]);
   const { setSearchedCategory, searchedCategory } = useContext(SearchContext);
 
   useEffect(() => {
+    console.log(endPoints.categories.getAllCategoryItems);
     getAllCategoriesItems()
       .then((res) => {
         const filteredData = res.filter((category) => {
