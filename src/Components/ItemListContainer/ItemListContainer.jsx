@@ -1,23 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 import styles from './ItemListContainer.module.css';
-import { getProducts } from '../../Services/products.service';
 import { SearchContext } from '../Context/SearchContext';
 import { ProductsSkeleton } from '../../Utils/Skeletons';
 import NotFound from '../NotFound/NotFound';
+import { getAllProducts } from '../../Services';
 
 const transformProductsData = (data) => {
   const productsWithUnitPrice = data.filter((product) => {
-    return product.unit_price.length > 0;
+    return product.unit_prices.length > 0;
   });
 
   return productsWithUnitPrice.map((product) => ({
     id: product.id,
-    name: product.name,
+    name: product.product_name,
     image: product.image,
     description: product.description,
-    category: product.category.name,
-    unit_price: product.unit_price,
+    category: product.category_id.name,
+    unit_price: product.unit_prices,
   }));
 };
 
@@ -46,16 +46,16 @@ const ItemListContainer = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    getProducts()
+    getAllProducts()
       .then((res) => {
         setLoading(true);
+
         const mappedProducts = transformProductsData(res);
         const filteredProducts = filterProducts(
           mappedProducts,
           searchString,
           searchedCategory
         );
-
         if (filteredProducts.length === 0) {
           setItems([]);
           setLoading(false);
@@ -65,9 +65,11 @@ const ItemListContainer = () => {
         }
       })
       .catch((error) => {
+        console.log(error);
         console.error(error);
       });
-  }, [items, searchString, searchedCategory]);
+  }, [searchString, searchedCategory]);
+
   if (items.length === 0 && searchString !== '') {
     return <NotFound />;
   }

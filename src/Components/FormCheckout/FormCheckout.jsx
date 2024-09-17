@@ -115,11 +115,9 @@ const FormCheckout = () => {
       setOrderInfo(cart);
       const getCartItemDetails = (cart) => {
         const itemDetails = cart.map((item) => {
-          console.log(item.unit_price);
           const prices = item.unit_price.map((price) => {
             return price.name + ' X' + price.quantity;
           });
-          console.log(prices);
           return item.name + ': ' + prices;
         });
         return itemDetails.join(`,
@@ -162,7 +160,7 @@ Pago: ${payment}.
 Total: $${total}.`;
       }
       const sendWhatsAppMessage = () => {
-        const whatsappLink = `https://wa.me/${3516192831}?text=${encodeURIComponent(
+        const whatsappLink = `https://wa.me/${5493516009816}?text=${encodeURIComponent(
           message
         )}`;
         window.location.href = whatsappLink;

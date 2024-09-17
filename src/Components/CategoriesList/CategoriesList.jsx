@@ -1,33 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
 import style from './CategoriesList.module.css';
-import { getAllCategoriesItems } from '../../Services/categories.service';
 import { SearchContext } from '../Context/SearchContext';
-import endPoints from '../../Services';
+import { getCategories } from '../../Services';
 
 const CategoriesList = () => {
   const [categories, setCategories] = useState([]);
   const { setSearchedCategory, searchedCategory } = useContext(SearchContext);
 
   useEffect(() => {
-    console.log(endPoints.categories.getAllCategoryItems);
-    getAllCategoriesItems()
+    getCategories()
       .then((res) => {
-        const filteredData = res.filter((category) => {
-          return category.name && category.products.length > 0;
-        });
-        const data = filteredData.map((category) => {
-          return category.name;
-        });
-        const sortedData = data.sort((a, b) => {
-          return a.localeCompare(b);
-        });
-        //NOTE - Ver oporque no filtra las cat que no tienen productos
-        setCategories(sortedData);
+        const newCategories = [
+          'Todos',
+          ...res.map((category) => category.name),
+        ];
+        setCategories(newCategories);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
+
+  const handleChangeCategory = (category) => {
+    if (category === 'Todos') {
+      setSearchedCategory('');
+      return;
+    }
+    setSearchedCategory(category);
+  };
 
   return (
     <div className={style.categories__container}>
@@ -41,7 +41,7 @@ const CategoriesList = () => {
           >
             <button
               onClick={() => {
-                setSearchedCategory(category);
+                handleChangeCategory(category);
               }}
               className={style.link}
             >

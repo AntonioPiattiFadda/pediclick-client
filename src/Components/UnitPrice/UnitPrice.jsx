@@ -14,14 +14,17 @@ const UnitPrice = ({ unitPrice, item }) => {
     addOneUnitPriceQuantity,
     minusOneUnitPriceQuantity,
   } = useContext(CartContext);
+  const newItem = { ...item };
+  delete newItem.unit_prices;
+
   const quantity = getQuantityForUnitPrice(item, unitPrice);
-  const isItemInCart = isUnitPriceInCart(item.name, unitPrice);
+  const isItemInCart = isUnitPriceInCart(item.id, unitPrice);
 
   const handleCheckboxChange = () => {
     if (isItemInCart) {
-      removeUnitPriceFromProduct(item, unitPrice);
+      removeUnitPriceFromProduct(newItem, unitPrice);
     } else {
-      addUnitPriceToProduct(item, unitPrice);
+      addUnitPriceToProduct(newItem, unitPrice);
       setShowModal(true);
       setTimeout(() => {
         setShowModal(false);
@@ -30,10 +33,10 @@ const UnitPrice = ({ unitPrice, item }) => {
   };
 
   const handlePlusClick = () => {
-    addOneUnitPriceQuantity(item, unitPrice);
+    addOneUnitPriceQuantity(newItem, unitPrice);
   };
   const handleMinusClick = () => {
-    minusOneUnitPriceQuantity(item, unitPrice);
+    minusOneUnitPriceQuantity(newItem, unitPrice);
   };
 
   return (
@@ -52,7 +55,7 @@ const UnitPrice = ({ unitPrice, item }) => {
               checked={isItemInCart}
             />
           )}
-          {unitPrice.name}
+          {unitPrice.unit}
         </label>
       </div>
       <div className={styles.countAndPrice}>
@@ -69,7 +72,7 @@ const UnitPrice = ({ unitPrice, item }) => {
             SIN STOCK <br /> DISPONIBLE
           </span>
         ) : (
-          <span className={styles.price}>${unitPrice.value}</span>
+          <span className={styles.price}>${unitPrice.price}</span>
         )}
       </div>
       {showModal && <AddToCartModal />}

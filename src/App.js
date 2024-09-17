@@ -9,7 +9,6 @@ import Cart from './Components/Cart/Cart';
 import NotFound from './Components/NotFound/NotFound';
 import SearchContextProvider from './Components/Context/SearchContext';
 import FormCheckout from './Components/FormCheckout/FormCheckout';
-import GoogleMapComponent from './Components/Maps/CalculateShipping';
 
 function App() {
   return (

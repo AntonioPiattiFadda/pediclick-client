@@ -7,11 +7,9 @@ const Item = ({ element }) => {
     return currentPrice.value < minPrice.value ? currentPrice : minPrice;
   }, element.unit_price[0]);
 
-  const minValue = bestPrice.value;
+  const minValue = bestPrice.price;
 
-  const noStockAtAll = element.unit_price.every(
-    (price) => price.blocked === true
-  );
+  const noStockAtAll = element.unit_price.every((price) => price.stock === 0);
 
   return (
     <>

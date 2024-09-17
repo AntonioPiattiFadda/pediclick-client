@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 import SearchBar from '../SearchBar/SearchBar';
@@ -50,13 +50,13 @@ const Navbar = () => {
 
         <div className={styles.navbar__logo_container}>
           <div className={styles.navbar__logo}>
-            <a href="/">
+            <Link href="/">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8nWPb3DyHkw5qoJBwFH-xJzpVRhUNL8zdJUM-nQ5Wy8kpSc5iv70wO-_4bmqAvdsJBA&usqp=CAU"
+                src="https://cstqhybxydgcazbgjqrd.supabase.co/storage/v1/object/public/PediClick-panarce/Panarse_Logo%201x1_1.png"
                 alt="Logo"
                 className={styles.LogoPrincipal}
               />
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import { CartContext } from '../Context/CartContext';
 import styles from './ItemDetailContainer.module.css';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { getOneProduct } from '../../Services/products.service';
 import { DetailProductsSkeleton } from '../../Utils/Skeletons';
-
 import 'react-toastify/dist/ReactToastify.css';
+import { getProductById } from '../../Services';
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
@@ -14,12 +13,12 @@ const ItemDetailContainer = () => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    getOneProduct(id)
+    getProductById(id)
       .then((res) => {
-        setItem(res);
+        setItem(res[0]);
       })
       .catch((error) => {
-        console.error(error);
+        console.error('Error al cargar el producto', error);
       });
   }, [id, Cart]);
 

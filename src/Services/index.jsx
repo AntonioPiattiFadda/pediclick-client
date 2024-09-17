@@ -1,35 +1,67 @@
-const API = process.env.REACT_APP_PUBLIC_API_URL;
-const VERSION = process.env.REACT_APP_PUBLIC_API_VERSION;
+import { createClient } from '@supabase/supabase-js';
 
-const endPoints = {
-  //NOTE - Controlar porque no me fije bien como esta armada la base de datos
-  auth: {
-    login: `${API}/api/${VERSION}/auth/login`,
-    profile: `${API}/api/${VERSION}/auth/profile`,
-  },
-  products: {
-    getProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
-    getAllProduct: `${API}/api/${VERSION}/products`,
-    getProducts: (limit, offset) =>
-      `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
-    addProducts: `${API}/api/${VERSION}/products`,
-    updateProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
-    deleteProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
-  },
+const supabaseUrl = 'https://cstqhybxydgcazbgjqrd.supabase.co';
+const supabaseKey = process.env.REACT_APP_PUBLIC_SUPABASE_KEY;
 
-  categories: {
-    getCategoriesList: `${API}/api/${VERSION}/categories/`,
-    getAllCategoryItems: `${API}/api/${VERSION}/categories/allItems`,
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-    getCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
-    addCategory: `${API}/api/${VERSION}/categories`,
-    updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
-    deleteCategory: (id) => `${API}/api/${VERSION}/categories/${id}`,
-  },
+export const getAllProducts = async () => {
+  let { data: products, error } = await supabase.from('products').select(`
+    *,
+    unit_prices (
+      *
+    ),
+    category_id (
+      *
+    )
+  `);
 
-  files: {
-    addImage: `${API}/api/${VERSION}/files/upload/`,
-  },
+  if (error) {
+    throw new Error(error.message);
+  }
+  return products;
 };
 
-export default endPoints;
+export const getCategories = async () => {
+  let { data: categories, error } = await supabase
+    .from('categories')
+    .select('*');
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return categories;
+};
+
+export const getProductById = async (id) => {
+  let { data: products, error } = await supabase
+    .from('products')
+    .select(
+      `
+        *,
+        unit_prices (
+          *
+        )
+      `
+    )
+    .eq('id', id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return products;
+};
+
+export const uploadImage = async (file) => {
+  const { data, error } = await supabase.storage
+    .from('PediClick-panarce')
+    .upload(file.name, file);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};

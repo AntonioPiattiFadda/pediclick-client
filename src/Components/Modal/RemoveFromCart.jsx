@@ -20,7 +20,7 @@ const RemoveFromCartModal = ({
         <p>
           Se eliminará el producto
           <span>
-            “{product.name} {unitPrice.name}”
+            “{product.product_name} {unitPrice.price}”
           </span>
           de su pedido.
         </p>

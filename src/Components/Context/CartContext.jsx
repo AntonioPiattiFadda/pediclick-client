@@ -10,80 +10,6 @@ const CartContextProvider = ({ children }) => {
     localStorage.setItem('CARRITO', JSON.stringify(newArray));
   }, [cart]);
 
-  const addToCart = (selectedProduct) => {
-    let dobbleProduct = isInCart(selectedProduct.id);
-    if (dobbleProduct) {
-      let newArray = cart.map((product) => {
-        if (selectedProduct.id === product.id) {
-          return {
-            ...product,
-            quantity: product.quantity + 1,
-          };
-        }
-        return product;
-      });
-      setCart(newArray);
-    } else {
-      setCart([...cart, selectedProduct]);
-    }
-  };
-
-  const isInCart = (id) => {
-    return cart.some((elemento) => elemento.id === id);
-  };
-
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  const removeProduct = (id) => {
-    const deletedProductIndex = cart.findIndex((product) => product.id === id);
-    const newArray = [...cart];
-    newArray.splice(deletedProductIndex, 1);
-    setCart(newArray);
-  };
-
-  const getCartQuantity = () => {
-    const total = cart.reduce((acc, element) => {
-      return acc + element.quantity;
-    }, 0);
-    return total;
-  };
-
-  const getProductQuantityByID = (id) => {
-    const filteredProduct = cart.find((product) => product.id === id);
-    return filteredProduct?.quantity;
-  };
-
-  const addOneElement = (id) => {
-    let newArray = cart.map((product) => {
-      if (id === product.id) {
-        return {
-          ...product,
-          quantity: product.quantity + 1,
-        };
-      }
-      return product;
-    });
-    setCart(newArray);
-  };
-
-  const minusOneElement = (id) => {
-    const filteredProduct = cart.find((product) => product.id === id);
-    if (filteredProduct.quantity > 0) {
-      let newArray = cart.map((product) => {
-        if (id === product.id) {
-          return {
-            ...product,
-            quantity: product.quantity - 1,
-          };
-        }
-        return product;
-      });
-      setCart(newArray);
-    }
-  };
-
   const addUnitPriceToProduct = (product, unitPrice) => {
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex(
@@ -110,9 +36,128 @@ const CartContextProvider = ({ children }) => {
         ...product,
         unit_price: [newUnitPrice],
       };
+
       updatedCart.push(newProduct);
     }
     setCart(updatedCart);
+  };
+  const addToCart = (selectedProduct) => {
+    let dobbleProduct = isInCart(selectedProduct.id);
+    if (dobbleProduct) {
+      let newArray = cart.map((product) => {
+        if (selectedProduct.id === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          };
+        }
+        return product;
+      });
+      setCart(newArray);
+    } else {
+      setCart([...cart, selectedProduct]);
+    }
+  };
+
+  const addOneUnitPriceQuantity = (product, unitPrice) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const existingUnitPriceIndex = updatedCart[
+        existingProductIndex
+      ].unit_price.findIndex((up) => up.id === unitPrice.id);
+      if (existingUnitPriceIndex !== -1) {
+        updatedCart[existingProductIndex].unit_price[
+          existingUnitPriceIndex
+        ].quantity += 1;
+      }
+    }
+
+    setCart(updatedCart);
+  };
+
+  const addOneElement = (id) => {
+    let newArray = cart.map((product) => {
+      if (id === product.id) {
+        return {
+          ...product,
+          quantity: product.quantity + 1,
+        };
+      }
+      return product;
+    });
+    setCart(newArray);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const getCartQuantity = () => {
+    const total = cart.reduce((acc, element) => {
+      return acc + element.quantity;
+    }, 0);
+    return total;
+  };
+
+  const getProductQuantityByID = (id) => {
+    const filteredProduct = cart.find((product) => product.id === id);
+    return filteredProduct?.quantity;
+  };
+
+  const getQuantityForUnitPrice = (product, unitPrice) => {
+    const productInCart = cart.find((item) => item.id === product.id);
+    if (productInCart) {
+      const unitPriceInProduct = productInCart.unit_price.find(
+        (up) => up.id === unitPrice.id
+      );
+      if (unitPriceInProduct) {
+        return unitPriceInProduct.quantity || 0;
+      }
+    }
+    return 0;
+  };
+
+  const getCartTotalPrice = () => {
+    const totalPerProduct = cart.map((product) => {
+      const totalPerUnitPrice = product.unit_price.reduce((acc, unitPrice) => {
+        return acc + unitPrice.quantity * unitPrice.price;
+      }, 0);
+      return totalPerUnitPrice;
+    });
+    const totalAllProducts = totalPerProduct.reduce((acc, total) => {
+      return acc + total;
+    }, 0);
+    return totalAllProducts;
+  };
+
+  const minusOneElement = (id) => {
+    const filteredProduct = cart.find((product) => product.id === id);
+    if (filteredProduct.quantity > 0) {
+      let newArray = cart.map((product) => {
+        if (id === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity - 1,
+          };
+        }
+        return product;
+      });
+      setCart(newArray);
+    }
+  };
+
+  const isInCart = (id) => {
+    return cart.some((elemento) => elemento.id === id);
+  };
+
+  const removeProduct = (id) => {
+    const deletedProductIndex = cart.findIndex((product) => product.id === id);
+    const newArray = [...cart];
+    newArray.splice(deletedProductIndex, 1);
+    setCart(newArray);
   };
 
   const removeUnitPriceFromProduct = (product, unitPrice) => {
@@ -141,50 +186,19 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
-  const isUnitPriceInCart = (productName, unitPrice) => {
+  const isUnitPriceInCart = (id, unitPrice) => {
     return cart.some((cartItem) => {
       return (
-        cartItem.name === productName &&
+        cartItem.id === id &&
         cartItem.unit_price.some((cartUnitPrice) => {
           return (
-            cartUnitPrice.name === unitPrice.name && cartUnitPrice.quantity > 0
+            cartUnitPrice.unit === unitPrice.unit && cartUnitPrice.quantity > 0
           );
         })
       );
     });
   };
 
-  const getQuantityForUnitPrice = (product, unitPrice) => {
-    const productInCart = cart.find((item) => item.id === product.id);
-    if (productInCart) {
-      const unitPriceInProduct = productInCart.unit_price.find(
-        (up) => up.id === unitPrice.id
-      );
-      if (unitPriceInProduct) {
-        return unitPriceInProduct.quantity || 0;
-      }
-    }
-    return 0;
-  };
-
-  const addOneUnitPriceQuantity = (product, unitPrice) => {
-    const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex(
-      (item) => item.id === product.id
-    );
-    if (existingProductIndex !== -1) {
-      const existingUnitPriceIndex = updatedCart[
-        existingProductIndex
-      ].unit_price.findIndex((up) => up.id === unitPrice.id);
-      if (existingUnitPriceIndex !== -1) {
-        updatedCart[existingProductIndex].unit_price[
-          existingUnitPriceIndex
-        ].quantity += 1;
-      }
-    }
-
-    setCart(updatedCart);
-  };
   const minusOneUnitPriceQuantity = (product, unitPrice) => {
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex(
@@ -230,19 +244,6 @@ const CartContextProvider = ({ children }) => {
       }
     }
     setCart(updatedCart);
-  };
-
-  const getCartTotalPrice = () => {
-    const totalPerProduct = cart.map((product) => {
-      const totalPerUnitPrice = product.unit_price.reduce((acc, unitPrice) => {
-        return acc + unitPrice.quantity * unitPrice.value;
-      }, 0);
-      return totalPerUnitPrice;
-    });
-    const totalAllProducts = totalPerProduct.reduce((acc, total) => {
-      return acc + total;
-    }, 0);
-    return totalAllProducts;
   };
 
   const data = {

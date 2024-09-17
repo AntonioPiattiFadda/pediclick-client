@@ -5,8 +5,13 @@ import MagnifyingGlass from '../../assets/svg/MagnifyingGlass.svg';
 import CategoriesList from '../CategoriesList/CategoriesList';
 
 const SearchBar = () => {
-  const { searchString, setSearchString } = useContext(SearchContext);
+  const { searchString, setSearchString, setSearchedCategory } =
+    useContext(SearchContext);
 
+  const handleSearch = (value) => {
+    setSearchedCategory('');
+    setSearchString(value);
+  };
   return (
     <>
       <div className={style.searchInput__container}>
@@ -23,7 +28,7 @@ const SearchBar = () => {
           value={searchString}
           type="text"
           placeholder="Papas, batata..."
-          onChange={(e) => setSearchString(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value)}
         />
       </div>
 
