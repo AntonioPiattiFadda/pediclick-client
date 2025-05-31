@@ -1,31 +1,44 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://cstqhybxydgcazbgjqrd.supabase.co';
-const supabaseKey = process.env.REACT_APP_PUBLIC_SUPABASE_KEY;
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-
 export const getAllProducts = async () => {
-  let { data: products, error } = await supabase.from('products').select(`
-    *,
-    unit_prices (
-      *
-    ),
-    category_id (
-      *
-    )
-  `);
+  const { data: products, error } = await supabase.from("products").select(`
+    id,
+name,
+description,
+slug,
+status,
+category_id,
+
+      product_images(
+      url,
+      sort_order  ),
+      product_prices(
+      quantity,
+      units(
+      name,
+      symbol),
+      price,
+      currency
+
+      )
+    `);
 
   if (error) {
     throw new Error(error.message);
   }
-  return products;
+
+  return { products, error };
 };
 
 export const getCategories = async () => {
   let { data: categories, error } = await supabase
     .from('categories')
     .select('*');
+
 
   if (error) {
     throw new Error(error.message);

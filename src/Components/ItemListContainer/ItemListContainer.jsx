@@ -6,20 +6,20 @@ import { ProductsSkeleton } from '../../Utils/Skeletons';
 import NotFound from '../NotFound/NotFound';
 import { getAllProducts } from '../../Services';
 
-const transformProductsData = (data) => {
-  const productsWithUnitPrice = data.filter((product) => {
-    return product.unit_prices.length > 0;
-  });
-
-  return productsWithUnitPrice.map((product) => ({
-    id: product.id,
-    name: product.product_name,
-    image: product.image,
-    description: product.description,
-    category: product.category_id.name,
-    unit_price: product.unit_prices,
-  }));
-};
+// const transformProductsData = (data) => {
+//   // const productsWithUnitPrice = data.filter((product) => {
+//   //   return product.unit_prices.length > 0;
+//   // });
+// console.log()
+//   return data.map((product) => ({
+//     id: product.id,
+//     name: product.product_name,
+//     product_images: product.image,
+//     description: product.description,
+//     // category: product.category_id.name,
+//     // unit_price: product.unit_prices,
+//   }));
+// };
 
 const filterProducts = (products, searchString, searchedCategory) => {
   let filteredProducts = products;
@@ -50,9 +50,9 @@ const ItemListContainer = () => {
       .then((res) => {
         setLoading(true);
 
-        const mappedProducts = transformProductsData(res);
+        // const mappedProducts = transformProductsData(res);
         const filteredProducts = filterProducts(
-          mappedProducts,
+          res.products,
           searchString,
           searchedCategory
         );
