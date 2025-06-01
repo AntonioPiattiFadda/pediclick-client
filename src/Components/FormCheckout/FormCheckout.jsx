@@ -115,8 +115,9 @@ const FormCheckout = () => {
       setOrderInfo(cart);
       const getCartItemDetails = (cart) => {
         const itemDetails = cart.map((item) => {
-          const prices = item.unit_price.map((price) => {
-            return price.name + ' X' + price.quantity;
+          const prices = item.product_prices.map((price) => {
+            console.log(price);
+            return price.units.symbol + ' X' + price.quantity;
           });
           return item.name + ': ' + prices;
         });
@@ -156,11 +157,11 @@ Pedido: ${getCartItemDetails(cart)}.
 Seleccioné retirar en tienda.
 
 Pago: ${payment}.
-        
+       
 Total: $${total}.`;
       }
       const sendWhatsAppMessage = () => {
-        const whatsappLink = `https://wa.me/${5493516009816}?text=${encodeURIComponent(
+        const whatsappLink = `https://wa.me/${5493513275878}?text=${encodeURIComponent(
           message
         )}`;
         window.location.href = whatsappLink;

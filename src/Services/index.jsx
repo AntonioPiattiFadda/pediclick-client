@@ -52,11 +52,26 @@ export const getProductById = async (id) => {
     .from('products')
     .select(
       `
-        *,
-        unit_prices (
-          *
-        )
-      `
+    id,
+name,
+description,
+slug,
+status,
+category_id,
+
+      product_images(
+      url,
+      sort_order  ),
+      product_prices(
+      quantity,
+      units(
+      name,
+      symbol),
+      price,
+      currency
+
+      )
+    `
     )
     .eq('id', id);
 

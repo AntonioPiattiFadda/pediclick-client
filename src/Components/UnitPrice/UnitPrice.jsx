@@ -17,6 +17,18 @@ const UnitPrice = ({ unitPrice, item }) => {
   const newItem = { ...item };
   delete newItem.unit_prices;
 
+// currency
+// "ARG"
+// price
+// 1000
+// quantity
+// 1
+// units
+// {name: 'Docena', symbol: 'x12'}
+
+
+  console.log('UnitPrice component rendered with item:', unitPrice, item);
+
   const quantity = getQuantityForUnitPrice(item, unitPrice);
   const isItemInCart = isUnitPriceInCart(item.id, unitPrice);
 
@@ -55,7 +67,8 @@ const UnitPrice = ({ unitPrice, item }) => {
               checked={isItemInCart}
             />
           )}
-          {unitPrice.unit}
+          {unitPrice.quantity} 
+          {unitPrice.units.name}
         </label>
       </div>
       <div className={styles.countAndPrice}>

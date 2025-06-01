@@ -40,20 +40,20 @@ const Cart = () => {
       <div className={styles.cartItems}>
         {cart.map((product) => {
 
-          const productValue = product.unit_price.map((unitPrice) => {
+          const productValue = product.product_prices.map((unitPrice) => {
             return (
               <div className={styles.cartItem} key={product.id}>
                 <div className={styles.cartItemFirstLine}>
                   <div className={styles.cartImage}>
                     <img
                       className={styles.cartImage}
-                      src={product.image}
-                      alt={product.product_name}
+                      src={product.product_images[0].url}
+                      alt={product.name}
                     />
                   </div>
                   <div className={styles.cardInfo_container}>
                     <span className={styles.cardName}>
-                      {product.product_name} <br />X{unitPrice.unit}{' '}
+                      {product.name} <br />X{unitPrice.unit}{' '}
                     </span>
                     <span className={styles.cardPrice}>${unitPrice.price}</span>
                   </div>
